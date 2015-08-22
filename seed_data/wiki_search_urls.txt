@@ -1,0 +1,10 @@
+Amelia Earhart|1|/w/api.php?action=parse&format=json&page=Amelia%20Earhart&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/amelia_earhart.html
+Titanic|2|/w/api.php?action=parse&format=json&page=RMS%20Titanic&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/titanic.html
+Martin Luther King Jr|3|/w/api.php?action=parse&format=json&page=Martin%20Luther%20King%2C%20Jr.&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/mlk.html
+JFK Assassination|4|/w/api.php?action=parse&format=json&page=Assassination%20of%20John%20F.%20Kennedy&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/jfk_assassination.html
+Hindenburg|5|/w/api.php?action=parse&format=json&page=Hindenburg%20disaster&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/hindenburg.html
+Abraham Lincoln Assisnation|6|/w/api.php?action=parse&format=json&page=Abraham%20Lincoln&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/Lincoln.html
+1972 Summer Olympics Massacre|7|/w/api.php?action=parse&format=json&page=Munich%20massacre&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/Olympics.html
+Death of Genghis Kahn|8|/w/api.php?action=parse&format=json&page=Genghis%20Khan&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/Kahn.html
+Signing of the Declaration of Independence|9|/w/api.php?action=parse&format=json&page=United%20States%20Declaration%20of%20Independence&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/Declaration.html
+Christopher Columbus' Transatlantic Expedition|10|/w/api.php?action=parse&format=json&page=Christopher%20Columbus&prop=text&section=0&disablepp=&disableeditsection=&disabletoc=|templates/wikiPages/Columbus.html

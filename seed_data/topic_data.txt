@@ -1,0 +1,10 @@
+1|Amelia Earhart Dissappearance|2|1|16|1915,06,01|1993,06,06|1937,07,03|37.7125689|-122.2197428|/static/img/AmeliaEarhart.jpg|Amelia Earhart Disappears during her attempt to circumnavigate the globe.
+2|Sinking of the Titanic|5|4|9|1910,04,01|1914,04,01|1912,04,15|41.732500|-49.946900|/static/img/Titanic.jpg|Luxery Liner RMS Titanic sank after hitting an iceburg on its maiden voyage. 
+3|Martin Luther King Jr. Assassination|16|10|20|1968,04,01|1969,04,01|1968,04,04|35.1345232|-90.0574813|/static/img/MLK.jpg|Civil rights leader Martin Luther King Jr. Assassinated.
+4|JFK Assassination|10|4|20|1963,09,16|1964,03,31|1963,11,22|32.778203|-96.808497|/static/img/JFK.jpg| President John F. Kennedy Assassinated at Dealey Plaza.
+5|Hindenburg Disaster|10|4|20|1936,05,06|1938,05,31|1937,05,06|40.0297287|-74.3382333|/static/img/Hindenburg.jpg|Explosion of the blimp, Hindenburg.
+6|Abraham Lincoln Assassination|16|10|20|1864,10,04|1865,12,06|1865,04,14|38.8969408|-77.0256002|/static/img/Lincoln.jpg|President Abraham Lincoln Assassinated at Ford's Theatre.
+7|1972 Summer Olympics Massacre|16|10|20|1968,04,26|1976,02,04|1972,09,05|48.1754646|11.551797|/static/img/Olympics.png|Massacre of Olympic athletes and Coaches during the Olympics.
+8|Death of Genghis Kahn|16|10|20|1227,05,01|1228,02,28|1227,08,18|38.426868|106.003618|/static/img/Kahn.jpg|End of the Rule of Genghis Kahn First Supreme Khan of the Mongols.
+9|Signing of the Declaration of Independence|16|10|20|1776,06,11|1776,08,02|1776,07,04|39.9488703|-75.1500262|/static/img/signatures.jpg|The Declaration of Indepence was signed declaring the thirteen colonies free from Great Britain.
+10|Christopher Columbus's Transatlantic Expedition|5|4|9|1475,08,01|1506,05,20|1492,08,03|37.2133144|-6.9296922|/static/img/Columbus.jpg|Start of the voyage of Christopher Columbus in which he discovered the Americas.

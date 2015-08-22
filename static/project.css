@@ -1,0 +1,212 @@
+
+
+
+.infobox {
+    border: 1px solid #aaa;
+    border-spacing: 3px;
+    background-color: #f9f9f9;
+    color: black;
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.2em;
+    float: right;
+    clear: right;
+    font-size: 88%;
+    line-height: 1.5em;
+}
+
+@media screen
+.mw-body-content {
+    position: relative;
+    line-height: 1.6;
+    font-size: 0.875em;
+    z-index: 0;
+}
+
+@media screen
+.mw-body {
+    margin-left: 10em;
+    padding: 1em;
+    border: 1px solid #a7d7f9;
+    border-right-width: 0;
+    margin-top: -1px;
+    background-color: #fff;
+    color: #252525;
+    direction: ltr;
+}
+
+div {
+    display: block;
+}
+
+div.hatnote {
+    padding-left: 1.6em;
+    margin-bottom: 0.5em;
+}
+
+@media screen
+.mw-content-ltr {
+    direction: ltr;
+}
+
+@media screen
+.mw-body .firstHeading {
+    overflow: visible;
+}
+@media screen
+.mw-body h1 {
+    font-size: 1.8em;
+}
+@media screen
+.mw-body h1, .mw-body h2 {
+    font-family: "Linux Libertine",Georgia,Times,serif;
+    line-height: 1.3;
+    margin-bottom: 0.25em;
+    padding: 0;
+}
+
+.video_wrapper{
+    display: inline;
+}
+
+.video_wrapper img{
+    width: 300px;
+}
+
+.map-canvas {
+    height:900px;
+    background_color: #CCC;
+}
+
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+ 
+/* Modal box or Popup box */
+.popupContainer{
+ position: absolute;
+ width:330px;
+ height: auto;
+ left:45%;
+ top:80px;
+ background: #FFF;
+}
+
+
+
+.btn  {
+    padding: 10px 20px;
+     background:  #F4F4F2;
+}
+ 
+.btn_red  {
+    background:  #ED6347;
+     color:  #FFF;
+}
+ 
+.btn:hover  {
+    background:  #E4E4E2;
+}
+ 
+.btn_red:hover  {
+    background:  #C12B05;
+}
+ 
+a.btn  {
+    color: #666;
+     text-align:  center;
+     text-decoration:  none;
+}
+ 
+a.btn_red  {
+    color:  #FFF;
+}
+ 
+.one_half  {
+    width: 50%;
+     display:  block;
+     float: left;
+}
+ 
+.one_half.last  {
+    width: 45%;
+     margin-left: 5%;
+}
+/* Popup Styles*/
+.popupHeader  {
+    font-size: 16px;
+     text-transform:  uppercase;
+}
+ 
+.popupHeader  {
+    background: #F4F4F2;
+     position: relative;
+     padding: 10px 20px;
+     border-bottom: 1px solid #DDD;
+     font-weight: bold;
+}
+ 
+.popupHeader .modal_close  {
+    position:  absolute;
+     right:  0;
+     top: 0;
+     padding: 10px 15px;
+     background: #E4E4E2;
+     cursor:  pointer;
+     color: #aaa;
+     font-size: 16px;
+}
+ 
+.popupBody  {
+    padding: 20px;
+}
+
+
+/* User Register Form */
+.user_register  {
+    display:  none;
+}
+ 
+.user_register label  {
+    display:  block;
+     margin-bottom: 5px;
+}
+ 
+.topic_map {
+
+    height: 700px;
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    border-right-width: 2px;
+    border-right-color: #ffffff;
+    border-right-style: solid;
+    border-left-width: 2px;
+    border-left-color: #ffffff;
+    border-left-style: solid;
+    
+
+}
+  
+.pop_up_box_text {
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    font-size: 16px; 
+    line-height: 22px; 
+    color: #ffffff; 
+    display: inline; 
+}
+.labels { 
+    color: black;
+    background-color: #FF8075;
+    font-family: Arial; 
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    width: 12px;
+}

@@ -1,0 +1,78 @@
+4|32.7788565|-96.8084918|Lee Harvey Oswald begins work at the Texas School Book Depository in Dallas, Texas.|1963,10,16|Oswald Works at the Texas School Book Depository|/static/img/spd.jpg
+4|32.8678453|-96.9408251|SS Agent Winston Lawson is briefed and receives a tentative schedule of Texas trip from SS Agent Roy H Kellerman who was the agent in charge of arranging the timetable for trip and responsible for motorcade route.|1963,11,4|Secret Service Notified|
+4|32.8037316|-96.8265169| Texas Governor John Connally announces that the President and Mrs. Kennedy will be attending a luncheon in Dallas on November 22nd.|1963,11,8|Trip to Texas Officially Announced|
+4|32.7751436|-96.8062984|"The Dallas Morning News" publishes the route of the presidential motorcade.|1963,11,21,06,00|Motorcade Route Published|
+4|32.8206646|-96.7313396|Anti-Kennerdy Propaganda appears in Dallas|1963,11,21,06,00|"Kennedy Wanted For Treason"|
+4|38.8976763|-77.0365298|Kennedys Depart from the White house via helicopter|1963,11,21,07,45|Kennedys Leave White House|
+4|38.8155192|-76.8665859|Air Force One leaves Andrews Airforce Base for Texas|1963,11,21,08,05|Air Force One Takes Off|
+4|29.4814305|-98.5144044|President Kennedy lands in San Antonio for a school dedication.|1963,11,21,11,30|Arrive in San Antonio|
+4|29.817178|-95.4012915|The Kennedys fly to Houston for a motorcade.|1963,11,21,01,52|Off to Houston|
+4|29.7616791|-95.368705|Kennedys attend a dinner at the Sam Houston Coliseum in honor of US Representative Albert Thomas.|1963,11,21,06,30|Last Supper|
+4|32.7800597|-97.4288201|Kennedys arrive in Fort Worth Texas.  Stay at the Hotel Texas|1963,11,21,09,07|Arrive in Fort Worth|
+4|32.7798565|-96.8084918|Oswald gets a ride to work at the Texas School Book Depository.  Has a large package with him that he claims is curtain rods.|1963,11,22,05,21|Oswald's Day Begins|
+4|32.7887651|-97.3507117|President Keendy Greets the crowd outside the Hotel Texas and gives an improptu speech|1963,11,22,06,50|Kennedy's Impromptu Speech|/static/img/Fortworth.jpg
+4|32.7518231|-97.3322038|President Kennedy arrives at the ballroom of the Fort Worth Chamber of commerce for Breakfast.  Delivers what would be his last public speech.|1963,11,22,07,00|Kennedy Gives Last Speech|/static/img/breakfast.jpg
+4|32.7800595|-97.4288201|The Kennedys depart Fort Worh for the short flight to Dallas, Texas|1963,11,22,09,20|Leave Fort Worth|
+4|32.8481029|-96.8512063|Kennedys arrive at Love Filed, meet Texas Governor Connally and crowds lining the fence.  Leave Love Field for luncheon at the Dallas Trade Mart.|1963,11,22,09,52|Motorcade Leave Love Field|/static/img/lovefield.jpg
+4|32.7801608|-96.7946854|President's limousine turns off Harwood onto Main Street in downtown Dallas|1963,11,22,10,21|Motorcade Turns onto Main Street|/static/img/jfkmotorcade.jpg
+4|32.7800124|-96.7997149|Large crowds line Main Street in downtown Dallas near the Adolphus Hotel.  Over 150,000 people lined the ten mile motorcade route.|1963,11,22,10,27|Motorcade Passes Adolphus Hotel|/static/img/motorcade.jpg
+4|32.7793449|-96.8054977|The first shot is fired, it misses the President hitting the street.|1963,11,22,10,29|First Shot Fired|
+4|32.7793449|-96.8054977|The second and third shots are fired hitting the President.|1963,11,22,10,30|President is Shot|/static/img/shot.jpg
+4|32.7902774|-96.8112261|The presidentail limousine races up Stemmons Freeway to Parkland Hospital.|1963,11,22,10,31|Race to the Hospital|/static/img/race.jpg
+4|32.7798563|-96.8084918|Lee Harvey Oswald is stopped and then released by a Dallas policeman in the second floor lunchtoom of the Texas School Book Depositry.|1963,11,22,10,32|Dallas Policeman Stops Oswald|
+4|38.9047475|-77.0429153|The first news wire service announcment of the shooting is broadcast.|1963,11,22,10,39|The First Announcement|/static/img/news.jpg
+4|32.811615|-96.838066|The Presidential limousine arrives at Parkland hospital.|1963,11,22,10,36|Hospital|
+4|38.9047475|-77.0429153|The CBS network interrupts TV soap opera "As the World Turns" and Walter Cronkite announces to America that the President has meen shot.|1963,11,22,10,45|Breaking News|/static/img/Cronkite.jpg
+4|32.801613|-96.838066|Doctors pronounce President Kennedy dead while crowds gather outside the hospital awaiting news.|1963,11,22,11,00|President Pronounced Dead|
+4|32.7433654|-96.825959|Oswald is arrested after a struggle and killing a police officer nearby. |1963,11,22,11,50|Oswald Arrested|/static/img/arrest.jpg
+4|32.8481027|-96.8512063|President Keendy's casket is loaded aboard Air Force One to be returned to Washington DC.|1963,11,23,12,15|Returning to DC|/static/img/hearse.jpg
+4|32.7803997|-96.7937669|Oswald is charged with the murder of the President and Officer Tippit.|1963,11,23,01,30|Murder Charges Filed|
+4|32.7813995|-96.7937669|Oswald is critically shot by Jack Ruby.|1963,11,24,09,21|Oswald Murdered|/static/img/LHOshot.jpg
+4|38.889933|-77.0090505|The Warren Commission is established by President Lyndon B. Johnson to investigate the assianation of President Kennedy.|1963,11,29|Warren Commission|
+4|32.779392|-96.8076854|Jack Ruby is convicted of the death of Lee Harvey Oswald.  He was sentenced to die in the electric chair.  It was the first courtroom verdict to be telivised.|1964,03,14|Ruby Convicted|/static/img/ruby.jpg
+4|38.8899385|-77.0090505|The Warren Commission Report published.|1964,09,24|Warren Commission Report|
+2|41.732500|-49.946900|Luxery Liner RMS Titanic sank after hitting an iceburg on its maiden voyage.|1912,04,15|Sinking|/static/img/Titanic.jpg
+3|35.1345232|-90.0574813|Civil rights leader Martin Luther King Jr. Assasinated.|1968,04,04|MLK Assassinated|/static/img/MLK.jpg|
+5|40.0297287|-74.3382333|Explosion of the blimp, Hindenburg.|1937,05,06|Explosion|/static/img/Hindenburg.jpg
+6|38.8969408|-77.0256002|President Abraham Lincoln Assinated at Ford's Theatre.|1865,04,14|Assasination|/static/img/Lincoln.jpg
+7|48.1754646|11.551797|Massacre of Olympic athletes and Coaches during the Olympics.|1972,09,05|1972 Olympic Massacre|/static/img/Olympic.png
+8|38.426868|106.003618|End of the Rule of Genghis Kahn First Supreme Khan of the Mongols.|1227,08,18|Death|/static/img/Kahn.jpg
+9|39.9488703|-75.1500262|The Declaration of Indepence was signed declaring the thirteen colonies free from Great Britain.|1776,07,04|Signing|/static/img/signatures.jpg
+10|37.2133144|-6.9296922|Start of the voyage of Christopher Columbus in which he discovered the Americas.|1492,08,03|Expedition Starts|/static/img/Columbus.jpg
+1|-4.6756424|-174.5178437|A piece of aluminum is found on Nikumaroro.  Fourteen years later it is identified as having come from Amealia Earhart's Electra|1991|Fragment Found|/static/img/wreckage.jpg
+1|40.0412595|-75.1516025|Amelia Earhart gradutes.|1918|Graduation|/static/img/graduation.jpg
+1|27.7789724|-82.6773319|15-year-old Betty Klenck recorded words from distress calls she heard over her short-wave radio in July 1937|1937,07,03|SOS?|/static/img/sos.jpg
+1|37.707803|-122.2268169|Journey began in Oakland, CA.|1937,05,20|Start: Oakland, California|/static/img/oaklandairport.jpg
+1|34.19064|-118.3347566|The first stop on Earhart's journey(283 miles from Oakland, CA).|1937,05,20|Burbank, California|
+1|32.15591|-110.883805|The second stop on Earhart's journey (393 miles from Burbank, CA).|1937,05,21|Tucson, Arizona|
+1|30.0586455|-90.1362867|The third stop on Earhart's journey (1070 miles from Tucson, AZ).|1937,05,22|New Orleans, Louisiana|
+1|25.782324|-80.2310801|The fourth stop on Earhart's journey (586 miles from New Orleans, LA).|1937,05,23|Miami, Florida|/static/img/miami.jpg
+1|18.4095975|-66.1283334|The fifth stop on Earhart's journey (908 miles from Miami, FL).|1937,06,01|San Juan, Puerto Rico|
+1|10.1057479|-63.102268|The sixth stop on Earhart's journey (492 miles from San Juan, Puerto Rico).|1937,06,02|Caripito, Venezuela|
+1|5.6223098|-55.1300016|The seventh stop on Earhart's journey (610 miles from Caripito, Venezuela).|1937,06,03|Paramaribo, Surinam|
+1|-3.7913514|-38.5192009|The eighth stop on Earhart's journey (1142 miles from Paramaribo, Surinam).|1937,06,04|Fortaleza, Brazil|
+1|-5.7999189|-35.2222448|The ninth stop on Earhart's journey (235 miles from Fortaleza, Brazil).|1937,06,05|Natal, Brazil|
+1|16.0199555|-16.4582992|The tenth stop on Earhart's journey (1727 miles from Natal, Brazil).  This was a transatlantic flight.|1937,06,07|Saint-Louis, Senegal|
+1|14.7324022|-17.3881194|The eleventh stop on Earhart's journey (100 miles from Saint-Louis, Senegal).|1937,06,08|Dakar, Senegal|
+1|16.2642656|-0.0161041|The twelfth stop on Earhart's journey (1016 miles from Dakar, Senegal).|1937,06,10|Gao, French Sudan|
+1|12.1202183|15.057459|The thirteenth stop on Earhart's journey (910 miles from Gao, French Sudan).|1937,06,11|Fort-Lamy, F.E. Africa|
+1|13.6276194|25.3455465|The fourteenth stop on Earhart's journey (610 miles from Fort-Lamy, F.E. Africa).|1937,06,12|El Fasher, Anglo-Egyptian Sudan|
+1|15.5015451|32.5725965|The fifteenth stop on Earhart's journey (437 miles from El Fasher, Anglo-Egyptian Sudan).|1937,06,13|Khartoum, Anglo-Egyptian Sudan|
+1|15.602493|39.4507885|The sixteenth stop on Earhart's journey (400 miles from Khartoum, Anglo-Egyptian Sudan).|1937,06,13|Massawa, Ethiopia|
+1|13.0117365|42.7292097|The seventeenth stop on Earhart's journey (241 miles from Massawa, Ethiopia).|1937,06,14|Assab, Italian Eritrea|
+1|25.0111454|67.0647044|The eighteenth stop on Earhart's journey (1627 miles from Assab, Italian Eritrea).  This was the first ever non-stop flight from the Red Sea to India.|1937,06,15|Karachi, British India|
+1|22.6757245|88.368587|The nineteenth stop on Earhart's journey (1178 miles from Karachi, British India).|1937,06,17|Calcutta, British India|
+1|20.1675105|92.8547287|The twentieth stop on Earhart's journey (291 miles from Calcutta, British India).|1937,06,18|Akyab, Burma|
+1|16.9875266|96.2463879|The twenty-first stop on Earhart's journey (268 miles from Akyab, Burma).|1937,06,19|Rangoon, Burma|
+1|13.7246005|100.6331108|The twenty-second stop on Earhart's journey (315 miles from Rangoon, Burma).|1937,06,20|Bangkok, Siam|
+1|1.3455918|103.8256208|The twenty-third stop on Earhart's journey (780 miles from Bangkok, Siam).|1937,06,20|Singapore, Straits Settlements|
+1|-6.9034494|107.6431576|The twenty-fourth stop on Earhart's journey (541 miles from Singapore, Straits Settlements).|1937,06,21|Bandoeng, Dutch East Indies|/static/img/Bandoeng.jpg
+1|-7.2756195|112.7116844|The twenty-fifth stop on Earhart's journey (310 miles from Bandoeng, Dutch East Indies).  She was delayed in Bandoeng due to a monsoon.|1937,06,25|Soerabaja, Dutch East Indies|
+1|-6.9004492|107.6431576|The twenty-sixth stop on Earhart's journey (310 miles from Soerabaja, Dutch East Indies).  Returned for repairs.  She was ill with dysentery.|1937,06,25|Bandoeng, Dutch East Indies (again)|
+1|-7.2746195|112.7116844|The twenty-seventh stop on Earhart's journey (310 miles from Bandoeng, Dutch East Indies).|1937,06,26|Soerabaja, Dutch East Indies (again)|
+1|-10.174951|123.6147184|The twenty-eighth stop  (668 miles from Soerabaja, Dutch East Indies).|1937,06,27|Koepang, Dutch East Indies|
+1|-12.5948609|131.0078759|The twenty-ninth stop on Earhart's journey (445 miles from Koepang, Dutch East Indies).  Here the plane's direction finder was repaired, and parachutes were removed and sent home.|1937,06,28|Darwin, Australia|
+1|-6.7137206|146.9954825|The thirtieth stop on Earhart's journey (1012 miles from Darwin, Australia).|1937,06,29|Lae, New Guinea|/static/img/lae.jpg
+1|0.8072649|-176.6176798|The thirty-first destination (2556 miles from Lae, New Guinea).  She did not arrive and was never seen again.|1937,07,02|Howland Island|
+1|21.3280681|-157.7989705|The thirty-second destination on Earhart's journey (1900 miles from Howland Island).  This flight was planned but not taken.|1937,07,03|Honolulu, Hawaii|
+1|37.716803|-122.2268169|The thirty-third destination on Earhart's journey (2400 miles from Honolulu, Hawaii).  This flight was planned but not taken.|1937,07,04|Oakland, California|

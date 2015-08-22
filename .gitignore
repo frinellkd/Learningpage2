@@ -1,0 +1,6 @@
+env/
+*.db
+*.pyc
+*.sh
+libraries/
+table_data/

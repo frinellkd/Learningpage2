@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% block body %} 
+<body onload="onLoad();" onresize="onResize();">
+   
+
+<h1>Learning Page</h1>
+<!-- html div for timeline: -->
+   
+
+<h2>Topics</h2>
+    <input type='button' id='resetmap' value="RESET MAP"> <br>
+    <div id='map-canvas' class='map-canvas' >Map goes here!</div>
+    
+
+    
+        
+<!--Begin script for map -->
+<script>
+
+// MAP VARIABLES
+//Create the variables that will be used within the map configuration options.
+//The latitude and longitude of the center of the map.
+var mainMapCenter = new google.maps.LatLng(22.3240816,-19.00143124);
+//The degree to which the map is zoomed in. This can range from 0 (least zoomed) to 21 and above (most zoomed).
+var mainMapZoom = 2;
+// The max and min zoom levels that are allowed.
+var mainMapZoomMax = 17;
+var mainMapZoomMin = 2;
+
+//These options configure the setup of the map. 
+var mainMapOptions = { 
+          center: mainMapCenter, 
+          zoom: mainMapZoom,
+          //The type of map. In addition to ROADMAP, the other 'premade' map styles are SATELLITE, TERRAIN and HYBRID. 
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          maxZoom: mainMapZoomMax,
+          minZoom: mainMapZoomMin
+};
+
+//Create the variable for the main map itself.
+var mainMap;
+// Creates dictionaries to store marker ids and infobox ids.
+var marker_dict = {};
+var info_dict = {};
+
+
+// MAP FUNCTIONS
+//The main function that is called when the web page loads
+//------------------------------------------------------------------------
+function loadmainMap(){
+
+    mainMap = new google.maps.Map(document.getElementById('map-canvas'),
+            mainMapOptions);
+
+    //Calls the function below to load up all the map markers.
+    loadMapMarkers();
+
+    };    
+    
+    
+
+function loadMapMarkers (){    
+    
+    {% for data in topic_data %}
+
+    var infowindow{{data.topic_id}} = new google.maps.InfoWindow({
+        content: '{{data.description}}<a href="/view/{{data.topic_id}}">Go to Page</a>'
+        });
+    
+    var myLatlng = new google.maps.LatLng({{data.center_lat}}, {{data.center_lng}})
+    // attach markers to each topic locaiton retruned in JSON
+    var marker{{data.topic_id}} = new google.maps.Marker({
+        map: mainMap,
+        title: '{{ data.topic_title}}',
+        label: '{{data.topic_id}}',
+        position: myLatlng,
+        query: '{{data.description}}'
+                    
+        });        
+        
+        marker{{data.topic_id}}.addListener('click', function(){
+        infowindow{{data.topic_id}}.open(mainMap, marker{{data.topic_id}});
+
+        });
+
+        marker_dict['{{data.topic_id}}'] = marker{{data.topic_id}}
+        info_dict['{{data.topic_id}}'] = infowindow{{data.topic_id}}
+
+    {% endfor %} 
+};
+
+    google.maps.event.addDomListener(window, 'load', loadmainMap);
+
+</script>
+<!--End script for map-->
+<!--Begin script for Timeline -->
+<script>
+var tl;
+function onLoad() {
+  var eventSource = new Timeline.DefaultEventSource();
+    var bandInfos = [
+     Timeline.createBandInfo({
+        eventSource:    eventSource,
+        date:           "Jun 28 1965 00:00:00 GMT", 
+        width:          "60%", 
+        intervalUnit:   Timeline.DateTime.YEAR, 
+        intervalPixels: 100
+        }),
+     Timeline.createBandInfo({
+        overview:       true, 
+        eventSource:    eventSource,
+        date:           "Jun 28 1965 00:00:00 GMT",
+        width:          "20%", 
+        intervalUnit:   Timeline.DateTime.DECADE, 
+        intervalPixels: 200
+        }),
+     Timeline.createBandInfo({
+        overview:       true, 
+        eventSource:    eventSource,
+        date:           "Jun 28 1965 00:00:00 GMT",
+        width:          "20%", 
+        intervalUnit:   Timeline.DateTime.CENTURY, 
+        intervalPixels: 200
+        })
+    ];
+    bandInfos[1].syncWith = 0;
+    bandInfos[1].highlight = true;
+    bandInfos[2].syncWith = 0;
+    bandInfos[2].highlisht = true;
+
+
+    
+    var event_dict={}
+    var url ="."
+    var events_list=[]
+    
+    {% for data in topic_data %}
+      events_list.push({
+          'start':'{{data.main_date}}',
+          'caption': "{{data.description}}",
+          'image': '{{data.image}}',
+          'imageSize': '50%',
+          'description': "{{data.description}}.<a href='/view/{{data.topic_id}}'>GO TO PAGE</a>" ,
+          'TopicID': "{{data.topic_id}}",
+          'durationEvent': false,
+          'title':"({{loop.index}}){{data.topic_title}}",
+          'classname': "topicboxes"    
+        })
+
+      event_dict['{{loop.index}}']='topic{{data.topic_id}}'
+
+    {% endfor %}
+
+    time_data={
+      'events': events_list
+    }
+
+    tl = Timeline.create(document.getElementById("mytimeline"), bandInfos);
+    eventSource.loadJSON(time_data, url);
+// upon clicking the event the bubble opens and the map centers and zooms to show where event occurred
+    tl.getBand(0).getEventPainter().addOnSelectListener(function(eventID) {
+      var evt = tl.getBand(0).getEventSource().getEvent(eventID);
+      var data_id = evt.getProperty('TopicID');
+      var map_marker = marker_dict[data_id];
+      mainMap.setZoom(17);
+      mainMap.panTo(map_marker.position);
+      info_dict[data_id].open(mainMap, map_marker)
+    });
+
+} //end of onload function.
+
+var resizeTimerID = null;
+function onResize() {
+    if (resizeTimerID == null) {
+        resizeTimerID = window.setTimeout(function() {
+            resizeTimerID = null;
+            tl.layout();
+        }, 500);
+     }
+ };
+
+
+</script>
+<script>
+
+$('#resetmap').on('click', function(event) {
+        loadmainMap()});
+
+
+</script>
+
+
+<div id='mytimeline' style="height: 150px; border: 1px solid #aaa"></div>        
+</body>
+</html>
+   
+{% endblock %}

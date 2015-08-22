@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<script>
+// For handling wikipedia links
+$(document).ready(function(){
+  $("#wiki a[href^='/wiki']")
+   .each(function()
+   { 
+      this.href = this.href.replace(/^.*\/wiki\//, 
+         "http://wikipedia.org/wiki/")
+   });
+
+});
+</script>
+
+<!--Begin script for map -->
+<script>
+
+// MAP VARIABLES
+//Create the variables that will be used within the map configuration options.
+//The latitude and longitude of the center of the map.
+var topicMapCenter = new google.maps.LatLng({{map_data.center_lat}},{{map_data.center_lng}});
+//The degree to which the map is zoomed in. This can range from 0 (least zoomed) to 21 and above (most zoomed).
+var topicMapZoom = {{map_data.zoom}};
+// The max and min zoom levels that are allowed.
+var topicMapZoomMax = {{map_data.maxzoom}};
+var topicMapZoomMin = {{map_data.minzoom}};
+// Creates dictionaries to store marker ids and infobox ids.
+var marker_dict = {};
+var info_dict = {};
+//Create the variable for the topic map itself.
+var topicMap;
+//These options configure the setup of the map. 
+var topicMapOptions = { 
+          center: topicMapCenter, 
+          zoom: topicMapZoom,
+          //The type of map. In addition to ROADMAP, the other 'premade' map styles are SATELLITE, TERRAIN and HYBRID. 
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          maxZoom:topicMapZoomMax,
+          minZoom:topicMapZoomMin,
+          
+};
+
+// MAP FUNCTIONS
+//The main function that is called when the web page loads
+//------------------------------------------------------------------------
+function loadtopicMap() {
+    
+  //Creates the map, assigning it to this variable, also loads the map into the div with the id 'topic_map{{topic_id}}', and applies the 'topicMapOptions' (above) to configure this map. 
+  
+  topicMap = new google.maps.Map(document.getElementById("topic_map{{topic_id}}"), topicMapOptions); 
+
+
+  //Calls the function below to load up all the map markers.
+  loadMapMarkers();
+
+  };
+
+
+//Function that loads the map markers.
+function loadMapMarkers (){
+
+  {% for data in event_data %}
+        {% if data.image %}
+        var infowindow{{data.event_data_id}} = new google.maps.InfoWindow({
+            content: '({{data.event_title}}.) {{data.description}}<img src="{{data.image}}"  style="width:48px; height:48px;">'
+            });
+
+        {% else %}
+        var infowindow{{data.event_data_id}} = new google.maps.InfoWindow({
+            content: '{{data.event_title}}. {{data.description}}'
+            });
+        {% endif %}
+
+        var myLatlng = new google.maps.LatLng({{data.lat}}, {{data.lng}});
+
+        // attach markers to each topic locaiton retruned in JSON
+            var marker{{data.event_data_id}} = new MarkerWithLabel({
+                    map: topicMap,
+                    title: '{{data.event_title}}',
+                    labelContent: {{loop.index}},
+                    labelAnchor: new google.maps.Point(6,35),
+                    labelClass: "labels",
+                    labelInBackground: false,
+                    position: myLatlng,
+                    query: '{{data.description}}'
+                    
+                    
+            });        
+            
+            marker{{data.event_data_id}}.addListener('click', function(){
+            infowindow{{data.event_data_id}}.open(topicMap, marker{{data.event_data_id}});    
+            });
+
+      marker_dict['{{data.event_data_id}}'] = marker{{data.event_data_id}}
+      info_dict['{{data.event_data_id}}'] = infowindow{{data.event_data_id}}
+
+  {% endfor %} 
+
+};
+
+google.maps.event.addDomListener(window, 'load', loadtopicMap);
+
+</script>
+<!--End script for map-->
+
+<!--Begin script for Timeline-->
+
+
+
+
+
+<h1>{{wiki_title|safe}}</h1>
+
+
+{% for key in youtube_keys %}
+
+<div class="video_wrapper" id='thumbnails'>
+        <!--Creates images that can be clicked to start corresponding video-->
+        <img id='thumbnail_{{key.youtube_video_key}}' src='http://img.youtube.com/vi/{{key.youtube_video_key}}/hqdefault.jpg'/ >
+</div >
+
+<div id='vph'></div>
+
+
+
+<script>
+    // embeds a video upon clicking the image related to the video
+var embedVid_{{key.youtube_video_key}} = '<iframe width="560" height="315" src="https://www.youtube.com/embed/{{key.youtube_video_key}}?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>'
+
+$('#thumbnail_{{key.youtube_video_key}}').on("click", function(evt) {
+        evt.preventDefault();
+        $("#vph").html(embedVid_{{key.youtube_video_key}});
+});
+
+
+</script>
+{% endfor %}
+
+ 
+<!--creating a dropdown box-->  
+<form>
+  <div class="checkbox">
+    <label>
+      <input type='button' id='selectall' value= 'SELECT ALL'>
+      <input type='button' id='unselectall' value= "UNSELECT ALL"> 
+      <input type='button' id='resetmap' value="RESET MAP"> <br>
+
+
+      {%for data in event_data %}
+          
+        <input  type="checkbox"
+              name="event{{loop.index}}"
+              id="{{data.event_data_id}}"
+              class = "checkbox1"
+              value="{{loop.index}}"
+              checked=true
+              onclick= 'validateme(this, marker_dict["{{data.event_data_id}}"], ".t_event{{data.event_data_id}}")'>({{loop.index}}) {{data.event_title}}<br>
+              
+      
+      {% endfor%}
+    </label>
+  </div>  
+</form>
+
+<script>
+//"""Function for checking whether an event is checked and disabling the map marker if not"""
+function validateme(target, marker, t_event) {
+
+  
+  if (target.checked){
+    marker.setMap(topicMap);
+    // $(t_event).show()
+    // document.getElementsByClassName(t_event).style.display = 'block'
+
+  } else { 
+    marker.setMap(null);
+    // $(t_event).hide();
+    // document.getElementsByClassName(t_event).style.display = 'none';      
+  }
+  
+}
+
+
+$('#selectall').on('click', function(event) {  //on click 
+    $('.checkbox1').each(function() { //loop through each checkbox
+          this.checked = true;
+          validateme(this, marker_dict[this.id], event_dict2[this.id]);  //select all checkboxes with class "checkbox1"               
+    });
+});    
+  
+$('#unselectall').on('click', function(event) {
+    $('.checkbox1').each(function() { //loop through each checkbox
+          this.checked = false;
+          validateme(this, marker_dict[this.id], event_dict2[this.id]); //deselect all checkboxes with class "checkbox1"
+          $('.timeline-event-cluster').hide();                       
+    });         
+});
+
+$('#resetmap').on('click', function(event) {
+    $('.checkbox1').each(function() { //loop through each checkbox
+          this.checked = true;
+          drawTimeline();
+          loadtopicMap()
+
+          
+           //deselect all checkboxes with class "checkbox1"                       
+    });         
+});
+
+</script>  
+
+ 
+
+
+
+<div id="topic_map{{topic_id}}" class="topic_map"></div>
+<div id='mytimeline'></div>
+<container>
+    <h1 id='wiki_title'>{{wiki_title|safe}}</h1>
+    <div id='wiki'>{{wiki_data|safe}}</div>
+</container>    
+
+    
+
+{% endblock %}
