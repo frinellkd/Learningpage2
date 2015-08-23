@@ -159,10 +159,15 @@
 }
 
 .timeline-event-bubble-image {
-    float: right;
-    padding-left: 5px;
+    float: center;
+    padding-left: 20px;
     padding-bottom: 5px;
-}.timeline-container {
+    height: 175px;
+
+
+}
+
+.timeline-container {
     position: relative;
     overflow: hidden;
 }

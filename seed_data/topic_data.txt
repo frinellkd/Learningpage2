@@ -1,4 +1,4 @@
-1|Amelia Earhart Dissappearance|2|1|16|HOUR|DAY|1937,07,03|37.7125689|-122.2197428|/static/img/AmeliaEarhart.jpg|Amelia Earhart Disappears during her attempt to circumnavigate the globe.|MONTH
+1|Amelia Earhart Dissappearance|2|1|16|DAY|WEEK|1937,07,03|37.7125689|-122.2197428|/static/img/AmeliaEarhart.jpg|Amelia Earhart Disappears during her attempt to circumnavigate the globe.|YEAR
 2|Sinking of the Titanic|5|4|9|MONTH|YEAR|1912,04,15|41.732500|-49.946900|/static/img/Titanic.jpg|Luxery Liner RMS Titanic sank after hitting an iceburg on its maiden voyage.|DECADE 
 3|Martin Luther King Jr. Assassination|16|10|20|DAY|MONTH|1968,04,04|35.1345232|-90.0574813|/static/img/MLK.jpg|Civil rights leader Martin Luther King Jr. Assassinated.|DECADE
 4|JFK Assassination|10|4|20|MINUTE|DAY|1963,11,23,01,00|32.778203|-96.808497|/static/img/JFK.jpg| President John F. Kennedy Assassinated at Dealey Plaza.|YEAR
