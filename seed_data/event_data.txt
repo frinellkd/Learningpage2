@@ -1,8 +1,8 @@
 4|32.7788565|-96.8084918|Lee Harvey Oswald begins work at the Texas School Book Depository in Dallas, Texas.|1963,10,16|Oswald Works at the Texas School Book Depository|/static/img/spd.jpg
 4|32.8678453|-96.9408251|SS Agent Winston Lawson is briefed and receives a tentative schedule of Texas trip from SS Agent Roy H Kellerman who was the agent in charge of arranging the timetable for trip and responsible for motorcade route.|1963,11,4|Secret Service Notified|
 4|32.8037316|-96.8265169| Texas Governor John Connally announces that the President and Mrs. Kennedy will be attending a luncheon in Dallas on November 22nd.|1963,11,8|Trip to Texas Officially Announced|
-4|32.7751436|-96.8062984|"The Dallas Morning News" publishes the route of the presidential motorcade.|1963,11,21,06,00|Motorcade Route Published|
-4|32.8206646|-96.7313396|Anti-Kennerdy Propaganda appears in Dallas|1963,11,21,06,00|"Kennedy Wanted For Treason"|
+4|32.7751436|-96.8062984|'The Dallas Morning News' publishes the route of the presidential motorcade.|1963,11,21,06,00|Motorcade Route Published|
+4|32.8206646|-96.7313396|Anti-Kennerdy Propaganda appears in Dallas|1963,11,21,06,00|'Kennedy Wanted For Treason'|
 4|38.8976763|-77.0365298|Kennedys Depart from the White house via helicopter|1963,11,21,07,45|Kennedys Leave White House|
 4|38.8155192|-76.8665859|Air Force One leaves Andrews Airforce Base for Texas|1963,11,21,08,05|Air Force One Takes Off|
 4|29.4814305|-98.5144044|President Kennedy lands in San Antonio for a school dedication.|1963,11,21,11,30|Arrive in San Antonio|
@@ -23,7 +23,7 @@
 4|38.9047475|-77.0429153|The first news wire service announcment of the shooting is broadcast.|1963,11,22,10,39|The First Announcement|/static/img/news.jpg
 4|32.811615|-96.838066|The Presidential limousine arrives at Parkland hospital.|1963,11,22,10,36|Hospital|
 4|38.9047475|-77.0429153|The CBS network interrupts TV soap opera "As the World Turns" and Walter Cronkite announces to America that the President has meen shot.|1963,11,22,10,45|Breaking News|/static/img/Cronkite.jpg
-4|32.801613|-96.838066|Doctors pronounce President Kennedy dead while crowds gather outside the hospital awaiting news.|1963,11,22,11,00|President Pronounced Dead|
+4|32.810615|-96.838066|Doctors pronounce President Kennedy dead while crowds gather outside the hospital awaiting news.|1963,11,22,11,00|President Pronounced Dead|
 4|32.7433654|-96.825959|Oswald is arrested after a struggle and killing a police officer nearby. |1963,11,22,11,50|Oswald Arrested|/static/img/arrest.jpg
 4|32.8481027|-96.8512063|President Keendy's casket is loaded aboard Air Force One to be returned to Washington DC.|1963,11,23,12,15|Returning to DC|/static/img/hearse.jpg
 4|32.7803997|-96.7937669|Oswald is charged with the murder of the President and Officer Tippit.|1963,11,23,01,30|Murder Charges Filed|

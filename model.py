@@ -87,13 +87,14 @@ class Topic(db.Model):
     zoom = db.Column(Integer)
     maxzoom = db.Column(Integer)
     minzoom = db.Column(Integer)
-    start_date = db.Column(Date)
-    end_date = db.Column(Date)
+    band1 = db.Column(String(20))
+    band2 = db.Column(String(20))
     main_date = db.Column(Date)
     center_lat = db.Column(Integer)
     center_lng = db.Column(Integer)
     image= db.Column(String(200))
     description = db.Column(String(500))
+    band3 = db.Column(String(20))
 
 class Topic_wiki(db.Model):
 

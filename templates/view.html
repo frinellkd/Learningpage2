@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
+<body onload="onLoad();" onresize="onResize();">
 
 <script>
-// For handling wikipedia links
+//For handling wikipedia links
 $(document).ready(function(){
   $("#wiki a[href^='/wiki']")
    .each(function()
@@ -14,8 +15,8 @@ $(document).ready(function(){
 });
 </script>
 
-<!--Begin script for map -->
-<script>
+
+<script>// Begin script for map
 
 // MAP VARIABLES
 //Create the variables that will be used within the map configuration options.
@@ -102,13 +103,103 @@ function loadMapMarkers (){
 
 google.maps.event.addDomListener(window, 'load', loadtopicMap);
 
-</script>
-<!--End script for map-->
-
-<!--Begin script for Timeline-->
+</script><!--End script for map-->
 
 
+<script> //Begin script for Timeline
 
+var tl;
+
+function onLoad() {
+  var eventSource = new Timeline.DefaultEventSource();
+
+    
+    var bandInfos = [
+     Timeline.createBandInfo({
+        eventSource:    eventSource,
+        date:           "{{time_data.main_date}}", 
+        width:          "60%",
+        timeZone:       -8, 
+        intervalUnit:   Timeline.DateTime.{{time_data.band1}}, 
+        intervalPixels: 100
+        }),
+     Timeline.createBandInfo({
+        overview:       true, 
+        eventSource:    eventSource,
+        date:           "{{time_data.main_date}}",
+        timeZone:       -8, 
+        width:          "20%", 
+        intervalUnit:   Timeline.DateTime.{{time_data.band2}}, 
+        intervalPixels: 200
+        }),
+     Timeline.createBandInfo({
+        overview:       true, 
+        eventSource:    eventSource,
+        date:           "{{time_data.main_date}}",
+        timeZone:       -8,
+        width:          "20%", 
+        intervalUnit:   Timeline.DateTime.{{time_data.band3}}, 
+        intervalPixels: 200
+        })
+    ];
+    bandInfos[1].syncWith = 0;
+    bandInfos[1].highlight = true;
+    bandInfos[2].syncWith = 0;
+    bandInfos[2].highlisht = true;
+
+
+    
+    var event_dict={}
+    var url ="."
+    var events_list=[]
+    
+    {% for data in event_data %}
+      events_list.push({
+          'start':'{{data.event_date}}',
+          'caption': "{{data.event_title}}",
+          'image': '{{data.image}}',
+          'imageSize': '50%',
+          'description': "{{data.description}}",
+          'TopicID': "{{data.event_data_id}}",
+          'durationEvent': false,
+          'title':"({{loop.index}}){{data.event_title}}",
+          'classname': "eventboxes"    
+        })
+
+      event_dict['{{loop.index}}']='topic{{data.event_data_id}}'
+
+    {% endfor %}
+
+    time_data={
+      'events': events_list
+    }
+
+    tl = Timeline.create(document.getElementById("mytimeline"), bandInfos, Timeline.HORIZONTAL);
+    eventSource.loadJSON(time_data, url);
+// upon clicking the event the bubble opens and the map centers and zooms to show where event occurred
+    tl.getBand(0).getEventPainter().addOnSelectListener(function(eventID) {
+      var evt = tl.getBand(0).getEventSource().getEvent(eventID);
+      var data_id = evt.getProperty('TopicID');
+      var map_marker = marker_dict[data_id];
+      topicMap.setZoom(17);
+      topicMap.panTo(map_marker.position);
+      info_dict[data_id].open(topicMap, map_marker)
+    });
+
+} //end of onload function.
+
+var resizeTimerID = null;
+function onResize() {
+    if (resizeTimerID == null) {
+        resizeTimerID = window.setTimeout(function() {
+            resizeTimerID = null;
+            tl.layout();
+        }, 500);
+     }
+ };
+
+
+</script> <!--End script for Timeline-->
 
 
 <h1>{{wiki_title|safe}}</h1>
@@ -194,7 +285,7 @@ $('#unselectall').on('click', function(event) {
     $('.checkbox1').each(function() { //loop through each checkbox
           this.checked = false;
           validateme(this, marker_dict[this.id], event_dict2[this.id]); //deselect all checkboxes with class "checkbox1"
-          $('.timeline-event-cluster').hide();                       
+                                 
     });         
 });
 
@@ -214,14 +305,14 @@ $('#resetmap').on('click', function(event) {
  
 
 
-
+<div id='mytimeline' style="height: 500px; border: 1px solid #aaa"></div>
 <div id="topic_map{{topic_id}}" class="topic_map"></div>
-<div id='mytimeline'></div>
+
 <container>
     <h1 id='wiki_title'>{{wiki_title|safe}}</h1>
     <div id='wiki'>{{wiki_data|safe}}</div>
 </container>    
 
     
-
+</body>
 {% endblock %}

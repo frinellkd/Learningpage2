@@ -6,6 +6,7 @@ from server import app
 
 from datetime import datetime
 
+
 def load_topic_wiki():
     """Load topics and topic_wiki info from wiki_search_urls into database."""
     User_file = open('seed_data/wiki_search_urls.txt')
@@ -47,19 +48,23 @@ def load_topic_video():
     db.session.commit()
 
 def date_treatment(event_date):
-    """Creates the correct date variable in talbe for different length date strings"""
+    """Creates the correct date variable in table for different length date strings"""
     
     date_list = event_date.split(',')
     if len(date_list)==1:
-        return datetime.strptime(event_date, '%Y')
+       return datetime.strptime(event_date, '%Y')
     elif len(date_list)==2:
-        return datetime.strptime(event_date, '%Y,%m')
+       return datetime.strptime(event_date, '%Y,%m')
     elif len(date_list)==3:
-        return datetime.strptime(event_date, '%Y,%m,%d')
+       return datetime.strptime(event_date, '%Y,%m,%d')
     elif len(date_list)==4:
-        return datetime.strptime(event_date, '%Y,%m,%d,%I')
+       return datetime.strptime(event_date, '%Y,%m,%d,%I')
     else:
-        return datetime.strptime(event_date, '%Y,%m,%d,%I,%M')        
+       return datetime.strptime(event_date, '%Y,%m,%d,%I,%M')
+
+    
+
+    
 
 
 
@@ -102,20 +107,20 @@ def load_topic_data():
         zoom=row[2]
         maxzoom=row[4]
         minzoom = row[3]
-        s_date = row[5]
-        start_date = date_treatment(s_date)
-        e_date = row[6]
-        end_date = date_treatment(e_date)
+        band1 = row[5]
+        band2 = row[6]
         m_date=row[7]
         main_date=date_treatment(m_date)
         center_lat = row[8]
         center_lng = row[9]
         image= row[10]
         description = row[11]
+        band3 = row[12]
 
-        topic_data=Topic( topic_title=topic_title, zoom=zoom, maxzoom=maxzoom, minzoom=minzoom, 
-            start_date=start_date, end_date=end_date, main_date=main_date, center_lat=center_lat, 
-            center_lng=center_lng, image=image, description=description)
+        topic_data=Topic( topic_title=topic_title, zoom=zoom, maxzoom=maxzoom, 
+            minzoom=minzoom, band1=band1, band2=band2, main_date=main_date, 
+            center_lat=center_lat, center_lng=center_lng, image=image, 
+            description=description, band3=band3)
 
        
 
