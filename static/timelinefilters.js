@@ -57,12 +57,19 @@ function onKeyPress(timeline, bandIndices, table) {
         window.clearTimeout(timerID);
     }
     timerID = window.setTimeout(function() {
+        console.log(event_filter_list, event_highlight_list)
+        getfilterinfo()
+        gethighlightinfo()
         performFiltering(timeline, bandIndices, table);
     }, 300);
 }
 function cleanString(s) {
     return s.replace(/^\s+/, '').replace(/\s+$/, '');
 }
+
+var event_highlight_list=[]
+var event_filter_list=[]
+
 function performFiltering(timeline, bandIndices, table) {
     timerID = null;
     
@@ -73,6 +80,9 @@ function performFiltering(timeline, bandIndices, table) {
     if (text.length > 0) {
         var regex = new RegExp(text, "i");
         filterMatcher = function(evt) {
+            var eventid = evt.getProperty('TopicID');
+            if (regex.test(evt.getText()) || regex.test(evt.getDescription())){
+                event_filter_list.push(eventid)};
             return regex.test(evt.getText()) || regex.test(evt.getDescription());
         };
     }
@@ -90,13 +100,16 @@ function performFiltering(timeline, bandIndices, table) {
         }
     }
 
-    var event_list =[]
+    
     var highlightMatcher = hasHighlights ? function(evt) {
         var text = evt.getText();
         var description = evt.getDescription();
+        var eventid = evt.getProperty('TopicID');
+        
         for (var x = 0; x < regexes.length; x++) {
             var regex = regexes[x];
             if (regex != null && (regex.test(text) || regex.test(description))) {
+                event_highlight_list.push(eventid);
                 return x;
             }
         }
@@ -108,7 +121,7 @@ function performFiltering(timeline, bandIndices, table) {
         timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(filterMatcher);
         
         timeline.getBand(bandIndex).getEventPainter().setHighlightMatcher(highlightMatcher);
-        c
+        
     }
     timeline.paint();
 }
@@ -123,6 +136,36 @@ function clearAll(timeline, bandIndices, table) {
         timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(null);
         timeline.getBand(bandIndex).getEventPainter().setHighlightMatcher(null);
     }
+    for (var i = 0; i < filter_marker_list.length; i++) {
+        var marker = filter_marker_list[i];
+        marker.setMap(topicMap)
+        event_filter_list = [];
+    }
+
+
     timeline.paint();
 }
 
+function gethighlightinfo(){
+    
+    for (var i = 0; i < event_highlight_list.length; i++) {
+        var eventid = event_highlight_list[i][0];
+        var marker = marker_dict[eventid]
+        var color = event_highlight_list[i][1]
+        console.log(marker);
+        console.log(color)
+    }
+}
+
+var filter_marker_list = []
+
+function getfilterinfo(){
+    
+    for (var i = 0; i < event_filter_list.length; i++) {
+        var eventid = event_filter_list[i];
+        var marker = marker_dict[eventid]
+        
+        filter_marker_list.push(marker)
+        marker.setMap(null)
+    }
+}
