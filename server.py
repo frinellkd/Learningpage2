@@ -14,6 +14,8 @@ from sqlalchemy import update
 
 import sqlite3, json
 
+from datetime import datetime
+
 
 db_connection = sqlite3.connect("learningpage.db", check_same_thread=False)
 db_cursor = db_connection.cursor()
@@ -39,6 +41,28 @@ def index():
     
 
     return render_template("homepage.html", topic_data=topic_data)
+
+@app.route('/new_event/<int:id>')
+def addNewEvent(id):
+    """Gets the information obtained from the form and process it for adding to the timeline"""    
+    event_title = request.args.get("event_title")
+    event_day   = request.args.get("event_day")
+    event_month = request.args.get("event_month")
+    event_year  = request.args.get("event_year")
+    event_lat   = request.args.get("event_lat")
+    event_lng   = request.args.get("event_lng")
+    event_image = request.args.get("event_image")
+    event_desc  = request.args.get("event_desc")
+
+    date = datetime(int(event_year), int(event_month), int(event_day))
+
+    new_event = Event_data(topic_id=id, lat=event_lat, lng=event_lng, description=event_desc,
+        event_date=date, event_title=event_title, image=event_image)
+
+    db.session.add(new_event)
+    db.session.commit()
+
+    return redirect('/view/' + str(id))
 
 
 # @app.route('/login_form')

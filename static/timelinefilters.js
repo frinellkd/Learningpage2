@@ -108,7 +108,7 @@ function performFiltering(timeline, bandIndices, table) {
         timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(filterMatcher);
         
         timeline.getBand(bandIndex).getEventPainter().setHighlightMatcher(highlightMatcher);
-        console.log(event_list);
+        c
     }
     timeline.paint();
 }
