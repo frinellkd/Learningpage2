@@ -381,7 +381,7 @@ $('#checkStatus').on('click', function(event) {
         checkStatus()
 });        
           
- 
+
 </script>
 
 <div id="topic_map{{topic_id}}" class="topic_map"></div>
@@ -389,7 +389,34 @@ $('#checkStatus').on('click', function(event) {
 <container>
     <h1 id='wiki_title'>{{wiki_title|safe}}</h1>
     <div id='wiki'>{{wiki_data|safe}}</div>
-</container>    
+</container>
+
+<div id="addeventform">
+  <form name='addevent' onsubmit= 'return validateForm'>
+    <label for="event_title">*EVENT TITLE: </label>
+    <input type="text" name='event_title'id="event_title" value="Event Title" required><br>
+    <label for="event_start_date">EVENT DATE: </label><br>
+    DAY:
+    <select name="Day" id="event_day">
+      {% for n in range(1,32) %}
+       <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
+      {% endfor %}
+    </select>  
+    MONTH:
+    <select name="Month" id="event_month">
+      {% for n in range(1,13) %}
+       <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
+      {% endfor %}
+    </select>
+    <label for="event_title">*YEAR: </label>
+    <input type="text" id="event_year" value="ex: 1972" required><br>
+    <label for="event_desc">DESCRIPTION</label>
+    <input type="text" style"width: 200px" id="event_desc" value="Describe the event.  Max 200 characters" required><br>
+
+    
+  <form>  
+
+</div>    
 
     
 </body>
