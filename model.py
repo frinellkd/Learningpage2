@@ -89,7 +89,7 @@ class Topic(db.Model):
     minzoom = db.Column(Integer)
     band1 = db.Column(String(20))
     band2 = db.Column(String(20))
-    main_date = db.Column(Date)
+    main_date = db.Column(DateTime)
     center_lat = db.Column(Integer)
     center_lng = db.Column(Integer)
     image= db.Column(String(200))

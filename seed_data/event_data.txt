@@ -1,4 +1,4 @@
-4|32.7788565|-96.8084918|Lee Harvey Oswald begins work at the Texas School Book Depository in Dallas, Texas.|1963,10,16|Oswald Works at the Texas School Book Depository|/static/img/spd.jpg
+4|32.7797565|-96.8084918|Lee Harvey Oswald begins work at the Texas School Book Depository in Dallas, Texas.|1963,10,16|Oswald Works at the Texas School Book Depository|/static/img/spd.jpg
 4|32.8678453|-96.9408251|SS Agent Winston Lawson is briefed and receives a tentative schedule of Texas trip from SS Agent Roy H Kellerman who was the agent in charge of arranging the timetable for trip and responsible for motorcade route.|1963,11,4|Secret Service Notified|
 4|32.8037316|-96.8265169| Texas Governor John Connally announces that the President and Mrs. Kennedy will be attending a luncheon in Dallas on November 22nd.|1963,11,8|Trip to Texas Officially Announced|
 4|32.7751436|-96.8062984|'The Dallas Morning News' publishes the route of the presidential motorcade.|1963,11,21,06,00|Motorcade Route Published|
@@ -8,27 +8,27 @@
 4|29.4814305|-98.5144044|President Kennedy lands in San Antonio for a school dedication.|1963,11,21,11,30|Arrive in San Antonio|
 4|29.817178|-95.4012915|The Kennedys fly to Houston for a motorcade.|1963,11,21,01,52|Off to Houston|
 4|29.7616791|-95.368705|Kennedys attend a dinner at the Sam Houston Coliseum in honor of US Representative Albert Thomas.|1963,11,21,06,30|Last Supper|
-4|32.7800597|-97.4288201|Kennedys arrive in Fort Worth Texas.  Stay at the Hotel Texas|1963,11,21,09,07|Arrive in Fort Worth|
-4|32.7798565|-96.8084918|Oswald gets a ride to work at the Texas School Book Depository.  Has a large package with him that he claims is curtain rods.|1963,11,22,05,21|Oswald's Day Begins|
+4|32.7801597|-97.4288201|Kennedys arrive in Fort Worth Texas.  Stay at the Hotel Texas|1963,11,21,09,07|Arrive in Fort Worth|
+4|32.7799565|-96.8084918|Oswald gets a ride to work at the Texas School Book Depository.  Has a large package with him that he claims is curtain rods.|1963,11,22,05,21|Oswald's Day Begins|
 4|32.7887651|-97.3507117|President Keendy Greets the crowd outside the Hotel Texas and gives an improptu speech|1963,11,22,06,50|Kennedy's Impromptu Speech|/static/img/Fortworth.jpg
 4|32.7518231|-97.3322038|President Kennedy arrives at the ballroom of the Fort Worth Chamber of commerce for Breakfast.  Delivers what would be his last public speech.|1963,11,22,07,00|Kennedy Gives Last Speech|/static/img/breakfast.jpg
 4|32.7800595|-97.4288201|The Kennedys depart Fort Worh for the short flight to Dallas, Texas|1963,11,22,09,20|Leave Fort Worth|
-4|32.8481029|-96.8512063|Kennedys arrive at Love Filed, meet Texas Governor Connally and crowds lining the fence.  Leave Love Field for luncheon at the Dallas Trade Mart.|1963,11,22,09,52|Motorcade Leave Love Field|/static/img/lovefield.jpg
+4|32.8482029|-96.8512063|Kennedys arrive at Love Filed, meet Texas Governor Connally and crowds lining the fence.  Leave Love Field for luncheon at the Dallas Trade Mart.|1963,11,22,09,52|Motorcade Leave Love Field|/static/img/lovefield.jpg
 4|32.7801608|-96.7946854|President's limousine turns off Harwood onto Main Street in downtown Dallas|1963,11,22,10,21|Motorcade Turns onto Main Street|/static/img/jfkmotorcade.jpg
 4|32.7800124|-96.7997149|Large crowds line Main Street in downtown Dallas near the Adolphus Hotel.  Over 150,000 people lined the ten mile motorcade route.|1963,11,22,10,27|Motorcade Passes Adolphus Hotel|/static/img/motorcade.jpg
-4|32.7793449|-96.8054977|The first shot is fired, it misses the President hitting the street.|1963,11,22,10,29|First Shot Fired|
-4|32.7793449|-96.8054977|The second and third shots are fired hitting the President.|1963,11,22,10,30|President is Shot|/static/img/shot.jpg
+4|32.779289|-96.808426|The first shot is fired, it misses the President hitting the street.|1963,11,22,10,29|First Shot Fired|
+4|32.779189|-96.808426|The second and third shots are fired hitting the President.|1963,11,22,10,30|President is Shot|/static/img/shot.jpg
 4|32.7902774|-96.8112261|The presidentail limousine races up Stemmons Freeway to Parkland Hospital.|1963,11,22,10,31|Race to the Hospital|/static/img/race.jpg
 4|32.7798563|-96.8084918|Lee Harvey Oswald is stopped and then released by a Dallas policeman in the second floor lunchtoom of the Texas School Book Depositry.|1963,11,22,10,32|Dallas Policeman Stops Oswald|
 4|38.9047475|-77.0429153|The first news wire service announcment of the shooting is broadcast.|1963,11,22,10,39|The First Announcement|/static/img/news.jpg
 4|32.811615|-96.838066|The Presidential limousine arrives at Parkland hospital.|1963,11,22,10,36|Hospital|
-4|38.9047475|-77.0429153|The CBS network interrupts TV soap opera "As the World Turns" and Walter Cronkite announces to America that the President has meen shot.|1963,11,22,10,45|Breaking News|/static/img/Cronkite.jpg
+4|38.9037475|-77.0429153|The CBS network interrupts TV soap opera "As the World Turns" and Walter Cronkite announces to America that the President has meen shot.|1963,11,22,10,45|Breaking News|/static/img/Cronkite.jpg
 4|32.810615|-96.838066|Doctors pronounce President Kennedy dead while crowds gather outside the hospital awaiting news.|1963,11,22,11,00|President Pronounced Dead|
 4|32.7433654|-96.825959|Oswald is arrested after a struggle and killing a police officer nearby. |1963,11,22,11,50|Oswald Arrested|/static/img/arrest.jpg
 4|32.8481027|-96.8512063|President Keendy's casket is loaded aboard Air Force One to be returned to Washington DC.|1963,11,23,12,15|Returning to DC|/static/img/hearse.jpg
-4|32.7803997|-96.7937669|Oswald is charged with the murder of the President and Officer Tippit.|1963,11,23,01,30|Murder Charges Filed|
+4|32.7812997|-96.7937669|Oswald is charged with the murder of the President and Officer Tippit.|1963,11,23,01,30|Murder Charges Filed|
 4|32.7813995|-96.7937669|Oswald is critically shot by Jack Ruby.|1963,11,24,09,21|Oswald Murdered|/static/img/LHOshot.jpg
-4|38.889933|-77.0090505|The Warren Commission is established by President Lyndon B. Johnson to investigate the assianation of President Kennedy.|1963,11,29|Warren Commission|
+4|38.8898383|-77.0090505|The Warren Commission is established by President Lyndon B. Johnson to investigate the assianation of President Kennedy.|1963,11,29|Warren Commission|
 4|32.779392|-96.8076854|Jack Ruby is convicted of the death of Lee Harvey Oswald.  He was sentenced to die in the electric chair.  It was the first courtroom verdict to be telivised.|1964,03,14|Ruby Convicted|/static/img/ruby.jpg
 4|38.8899385|-77.0090505|The Warren Commission Report published.|1964,09,24|Warren Commission Report|
 2|41.732500|-49.946900|Luxery Liner RMS Titanic sank after hitting an iceburg on its maiden voyage.|1912,04,15|Sinking|/static/img/Titanic.jpg

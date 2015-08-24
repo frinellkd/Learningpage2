@@ -31,7 +31,7 @@ var topicMapZoomMin = {{map_data.minzoom}};
 var marker_dict = {};
 var info_dict = {};
 //Create the variable for the topic map itself.
-var topicMap;
+var topicMap, path;
 //These options configure the setup of the map. 
 var topicMapOptions = { 
           center: topicMapCenter, 
@@ -53,11 +53,108 @@ function loadtopicMap() {
   topicMap = new google.maps.Map(document.getElementById("topic_map{{topic_id}}"), topicMapOptions); 
 
 
+      
   //Calls the function below to load up all the map markers.
   loadMapMarkers();
-
+  createPath()
   };
 
+// Function that creates a path
+
+var pathCoordinates
+
+function createPath(){
+  // JFK Motorcade
+  {% if topic_id==4 %}
+      pathCoordinates = [
+        {lat: parseFloat(32.831477), lng: parseFloat(-96.840354)},
+        {lat: parseFloat(32.835799), lng: parseFloat(-96.835054)},
+        {lat: parseFloat(32.836299), lng: parseFloat(-96.833863)},
+        {lat: parseFloat(32.836414), lng: parseFloat(-96.832893)},
+        {lat: parseFloat(32.830631), lng: parseFloat(-96.827224)},
+        {lat: parseFloat(32.829898), lng: parseFloat(-96.826361)},
+        {lat: parseFloat(32.809775), lng: parseFloat(-96.803115)},
+        {lat: parseFloat(32.808156), lng: parseFloat(-96.803271)},
+        {lat: parseFloat(32.807282), lng: parseFloat(-96.803625)},
+        {lat: parseFloat(32.806167), lng: parseFloat(-96.803811)},
+        {lat: parseFloat(32.805552), lng: parseFloat(-96.804289)},
+        {lat: parseFloat(32.804195), lng: parseFloat(-96.805390)},
+        {lat: parseFloat(32.803930), lng: parseFloat(-96.805525)},
+        {lat: parseFloat(32.803312), lng: parseFloat(-96.805620)},
+        {lat: parseFloat(32.802876), lng: parseFloat(-96.805724)},
+        {lat: parseFloat(32.802140), lng: parseFloat(-96.806017)},
+        {lat: parseFloat(32.801886), lng: parseFloat(-96.806003)},
+        {lat: parseFloat(32.799672), lng: parseFloat(-96.805403)},
+        {lat: parseFloat(32.799408), lng: parseFloat(-96.805408)},
+        {lat: parseFloat(32.798024), lng: parseFloat(-96.805552)},
+        {lat: parseFloat(32.792216), lng: parseFloat(-96.805139)},
+        {lat: parseFloat(32.792060), lng: parseFloat(-96.805069)},
+        {lat: parseFloat(32.790782), lng: parseFloat(-96.804986)},
+        {lat: parseFloat(32.790744), lng: parseFloat(-96.803590)},
+        {lat: parseFloat(32.789494), lng: parseFloat(-96.802209)},
+        {lat: parseFloat(32.788896), lng: parseFloat(-96.801580)},
+        {lat: parseFloat(32.783669), lng: parseFloat(-96.795287)},
+        {lat: parseFloat(32.783191), lng: parseFloat(-96.794595)},
+        {lat: parseFloat(32.781681), lng: parseFloat(-96.794182)},
+        {lat: parseFloat(32.778860), lng: parseFloat(-96.807859)},
+        {lat: parseFloat(32.779557), lng: parseFloat(-96.808076)},
+        {lat: parseFloat(32.779141), lng: parseFloat(-96.808617)},
+        {lat: parseFloat(32.778901), lng: parseFloat(-96.808792)},
+        {lat: parseFloat(32.778712), lng: parseFloat(-96.809102)},
+        {lat: parseFloat(32.778512), lng: parseFloat(-96.809967)},
+        {lat: parseFloat(32.778411), lng: parseFloat(-96.810202)},
+        {lat: parseFloat(32.778286), lng: parseFloat(-96.810939)}
+  
+      ];
+  {% endif %}
+  
+  // Amelia Earhart Flight
+  {% if topic_id==1 %}
+      pathCoordinates = [
+        {lat: parseFloat(37.707803), lng: parseFloat(-122.2268169)},
+        {lat: parseFloat(34.19064), lng: parseFloat(-118.3347566)},
+        {lat: parseFloat(32.15591), lng: parseFloat(-110.883805)},
+        {lat: parseFloat(30.0586455), lng: parseFloat(-90.1362867)},
+        {lat: parseFloat(25.782324), lng: parseFloat(-80.2310801)},
+        {lat: parseFloat(18.4095975), lng: parseFloat(-66.1283334)},
+        {lat: parseFloat(10.1057479), lng: parseFloat(-63.102268)},
+        {lat: parseFloat(5.6223098), lng: parseFloat(-55.1300016)},
+        {lat: parseFloat(-3.7913514), lng: parseFloat(-38.5192009)},
+        {lat: parseFloat(-5.7999189), lng: parseFloat(-35.2222448)},
+        {lat: parseFloat(16.0199555), lng: parseFloat(-16.4582992)},
+        {lat: parseFloat(14.7324022), lng: parseFloat(-17.3881194)},
+        {lat: parseFloat(16.2642656), lng: parseFloat(-0.0161041)},
+        {lat: parseFloat(12.1202183), lng: parseFloat(15.057459)},
+        {lat: parseFloat(13.6276194), lng: parseFloat(25.3455465)},
+        {lat: parseFloat(15.5015451), lng: parseFloat(32.5725965)},
+        {lat: parseFloat(15.602493), lng: parseFloat(39.4507885)},
+        {lat: parseFloat(13.0117365), lng: parseFloat(42.7292097)},
+        {lat: parseFloat(25.0111454), lng: parseFloat(67.0647044)},
+        {lat: parseFloat(22.6757245), lng: parseFloat(88.368587)},
+        {lat: parseFloat(20.1675105), lng: parseFloat(92.8547287)},
+        {lat: parseFloat(16.9875266), lng: parseFloat(96.2463879)},
+        {lat: parseFloat(13.7246005), lng: parseFloat(100.6331108)},
+        {lat: parseFloat(1.3455918), lng: parseFloat(103.8256208)},
+        {lat: parseFloat(-6.9034494), lng: parseFloat(107.6431576)},
+        {lat: parseFloat(-7.2756195), lng: parseFloat(112.7116844)},
+        {lat: parseFloat(-6.9004492), lng: parseFloat(107.6431576)},
+        {lat: parseFloat(-7.2746195), lng: parseFloat(112.7116844)},
+        {lat: parseFloat(-10.174951), lng: parseFloat(123.6147184)},
+        {lat: parseFloat(-12.5948609), lng: parseFloat(131.0078759)},
+        {lat: parseFloat(-6.7137206), lng: parseFloat(146.9954825)},
+        {lat: parseFloat(0.8072649), lng: parseFloat(-176.6176798)},
+      ];   
+  {% endif %}    
+  
+  var path = new google.maps.Polyline({
+    path: pathCoordinates,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+  path.setMap(topicMap);
+}
 
 //Function that loads the map markers.
 function loadMapMarkers (){
@@ -88,10 +185,14 @@ function loadMapMarkers (){
                     query: '{{data.description}}'
                     
                     
-            });        
+            });  
+
+
             
             marker{{data.event_data_id}}.addListener('click', function(){
-            infowindow{{data.event_data_id}}.open(topicMap, marker{{data.event_data_id}});    
+            infowindow{{data.event_data_id}}.open(topicMap, marker{{data.event_data_id}});
+            centerTimeline({{loop.index}});
+                
             });
 
       marker_dict['{{data.event_data_id}}'] = marker{{data.event_data_id}}
@@ -109,69 +210,23 @@ google.maps.event.addDomListener(window, 'load', loadtopicMap);
 <script> //Begin script for Timeline
 
 var tl;
-
+var event_dict={}
 function onLoad() {
   var eventSource = new Timeline.DefaultEventSource();
-      {% if map_data.topic_id==4 %}
-
-       var zones = [
-                {   start:    "Fri Nov 22 1963 00:00:00 GMT-0600",
-                    end:      "Mon Nov 25 1963 00:00:00 GMT-0600",
-                    magnify:  10,
-                    unit:     Timeline.DateTime.DAY
-                },
-                {   start:    "Fri Nov 22 1963 09:00:00 GMT-0600",
-                    end:      "Sun Nov 24 1963 00:00:00 GMT-0600",
-                    magnify:  5,
-                    unit:     Timeline.DateTime.HOUR
-                },
-                {   start:    "Fri Nov 22 1963 11:00:00 GMT-0600",
-                    end:      "Sat Nov 23 1963 00:00:00 GMT-0600",
-                    magnify:  5,
-                    unit:     Timeline.DateTime.MINUTE,
-                    multiple: 10
-                },
-                {   start:    "Fri Nov 22 1963 12:00:00 GMT-0600",
-                    end:      "Fri Nov 22 1963 14:00:00 GMT-0600",
-                    magnify:  3,
-                    unit:     Timeline.DateTime.MINUTE,
-                    multiple: 5
-                }
-            ];
-            var zones2 = [
-                {   start:    "Fri Nov 22 1963 00:00:00 GMT-0600",
-                    end:      "Mon Nov 25 1963 00:00:00 GMT-0600",
-                    magnify:  10,
-                    unit:     Timeline.DateTime.WEEK
-                },
-                {   start:    "Fri Nov 22 1963 09:00:00 GMT-0600",
-                    end:      "Sun Nov 24 1963 00:00:00 GMT-0600",
-                    magnify:  5,
-                    unit:     Timeline.DateTime.DAY
-                },
-                {   start:    "Fri Nov 22 1963 11:00:00 GMT-0600",
-                    end:      "Sat Nov 23 1963 00:00:00 GMT-0600",
-                    magnify:  5,
-                    unit:     Timeline.DateTime.MINUTE,
-                    multiple: 60
-                },
-                {   start:    "Fri Nov 22 1963 12:00:00 GMT-0600",
-                    end:      "Fri Nov 22 1963 14:00:00 GMT-0600",
-                    magnify:  3,
-                    unit:     Timeline.DateTime.MINUTE,
-                    multiple: 15
-                }
-            ];
-     {% endif %}
-     
+      var theme = Timeline.ClassicTheme.create()
+      theme.event.bubble.width = 250
+      var url ="."
+      var events_list=[]
+      
     var bandInfos = [
      Timeline.createBandInfo({
         eventSource:    eventSource,
         date:           "{{time_data.main_date}}", 
-        width:          "60%",
+        width:          "70%",
         timeZone:       -8, 
         intervalUnit:   Timeline.DateTime.{{time_data.band1}}, 
-        intervalPixels: 50
+        intervalPixels: 600,
+        theme:          theme
         }),
      Timeline.createBandInfo({
         overview:       true, 
@@ -180,16 +235,18 @@ function onLoad() {
         timeZone:       -8, 
         width:          "20%", 
         intervalUnit:   Timeline.DateTime.{{time_data.band2}}, 
-        intervalPixels: 200
+        intervalPixels: 150,
+        theme:          theme
         }),
      Timeline.createBandInfo({
         overview:       true, 
         eventSource:    eventSource,
         date:           "{{time_data.main_date}}",
         timeZone:       -8,
-        width:          "20%", 
+        width:          "10%", 
         intervalUnit:   Timeline.DateTime.{{time_data.band3}}, 
-        intervalPixels: 200
+        intervalPixels: 200, 
+        theme:          theme
         })
     ];
     bandInfos[1].syncWith = 0;
@@ -197,18 +254,31 @@ function onLoad() {
     bandInfos[2].syncWith = 0;
     bandInfos[2].highlisht = true;
 
+    {% if topic_id==4 %}
+    for (var i = 0; i <+ 2; i++) {
+                bandInfos[i].decorators = [
+                    new Timeline.SpanHighlightDecorator({
+                        startDate:  "Fri Nov 22 1963 10:29:00 GMT-0800",
+                        endDate:    "Fri Nov 22 1963 11:00:00 GMT-0800",
+                        color:      "#FFC080", // set color explicitly
+                        opacity:    50,
+                        startLabel: "shot",
+                        endLabel:   "t.o.d.",
+                        theme:      theme
+                    }),
+                    
+                ];
+            }
 
+
+    {% endif %}
     
-    var event_dict={}
-    var url ="."
-    var events_list=[]
-    
+      
     {% for data in event_data %}
       events_list.push({
           'start':'{{data.event_date}}',
           'caption': "{{data.event_title}}",
           'image': '{{data.image}}',
-          'imageSize': '50%',
           'description': "{{data.description}}",
           'TopicID': "{{data.event_data_id}}",
           'durationEvent': false,
@@ -216,7 +286,7 @@ function onLoad() {
           'classname': "eventboxes"    
         })
 
-      event_dict['{{loop.index}}']='topic{{data.event_data_id}}'
+      event_dict['{{loop.index}}']='{{data.event_date}}' 
 
     {% endfor %}
 
@@ -233,10 +303,15 @@ function onLoad() {
       var map_marker = marker_dict[data_id];
       topicMap.setZoom(17);
       topicMap.panTo(map_marker.position);
-      info_dict[data_id].open(topicMap, map_marker)
     });
 
+   setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1,2], theme); 
+
 } //end of onload function.
+
+function checkStatus(timeline) {
+        console.log(evt.getProperty());
+}
 
 var resizeTimerID = null;
 function onResize() {
@@ -247,7 +322,9 @@ function onResize() {
         }, 500);
      }
  };
-
+function centerTimeline(index) { 
+  tl.getBand(0).setCenterVisibleDate(Timeline.DateTime.parseGregorianDateTime(event_dict[index]))
+};
 
 </script> <!--End script for Timeline-->
 
@@ -280,82 +357,33 @@ $('#thumbnail_{{key.youtube_video_key}}').on("click", function(evt) {
 {% endfor %}
 
  
-<!--creating a dropdown box-->  
-<form>
-  <div class="checkbox">
-    <label>
-      <input type='button' id='selectall' value= 'SELECT ALL'>
-      <input type='button' id='unselectall' value= "UNSELECT ALL"> 
-      <input type='button' id='resetmap' value="RESET MAP"> <br>
-
-
-      {%for data in event_data %}
-          
-        <input  type="checkbox"
-              name="event{{loop.index}}"
-              id="{{data.event_data_id}}"
-              class = "checkbox1"
-              value="{{loop.index}}"
-              checked=true
-              onclick= 'validateme(this, marker_dict["{{data.event_data_id}}"], ".t_event{{data.event_data_id}}")'>({{loop.index}}) {{data.event_title}}<br>
-              
-      
-      {% endfor%}
-    </label>
-  </div>  
-</form>
-
-<script>
-//"""Function for checking whether an event is checked and disabling the map marker if not"""
-function validateme(target, marker, t_event) {
-
-  
-  if (target.checked){
-    marker.setMap(topicMap);
-    // $(t_event).show()
-    // document.getElementsByClassName(t_event).style.display = 'block'
-
-  } else { 
-    marker.setMap(null);
-    // $(t_event).hide();
-    // document.getElementsByClassName(t_event).style.display = 'none';      
-  }
-  
-}
-
-
-$('#selectall').on('click', function(event) {  //on click 
-    $('.checkbox1').each(function() { //loop through each checkbox
-          this.checked = true;
-          validateme(this, marker_dict[this.id], event_dict2[this.id]);  //select all checkboxes with class "checkbox1"               
-    });
-});    
-  
-$('#unselectall').on('click', function(event) {
-    $('.checkbox1').each(function() { //loop through each checkbox
-          this.checked = false;
-          validateme(this, marker_dict[this.id], event_dict2[this.id]); //deselect all checkboxes with class "checkbox1"
-                                 
-    });         
-});
-
-$('#resetmap').on('click', function(event) {
-    $('.checkbox1').each(function() { //loop through each checkbox
-          this.checked = true;
-          drawTimeline();
-          loadtopicMap()
-
-          
-           //deselect all checkboxes with class "checkbox1"                       
-    });         
-});
-
-</script>  
+ 
 
  
 
+<div class="controls" id="controls"></div>
+<div id='mytimeline' style="height: 300px; border: 1px solid #aaa"></div>
+<input type='button' id='resetmap' value="RESET MAP">
+<input type='button' id='resettimeline' value ='RESET TIMELINE'>
+<input type='button' id='checkStatus' value ='CHECK STATUS'><br>
 
-<div id='mytimeline' style="height: 500px; border: 1px solid #aaa"></div>
+
+<script>
+
+
+$('#resetmap').on('click', function(event) {
+        loadtopicMap();
+});
+$('#resettimeline').on('click', function(event) {
+        tl.getBand(0).setCenterVisibleDate(Timeline.DateTime.parseGregorianDateTime('{{time_data.main_date}}'))
+});        
+$('#checkStatus').on('click', function(event) {
+        checkStatus()
+});        
+          
+ 
+</script>
+
 <div id="topic_map{{topic_id}}" class="topic_map"></div>
 
 <container>

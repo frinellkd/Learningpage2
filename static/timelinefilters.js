@@ -89,6 +89,8 @@ function performFiltering(timeline, bandIndices, table) {
             regexes.push(null);
         }
     }
+
+    var event_list =[]
     var highlightMatcher = hasHighlights ? function(evt) {
         var text = evt.getText();
         var description = evt.getDescription();
@@ -104,7 +106,9 @@ function performFiltering(timeline, bandIndices, table) {
     for (var i = 0; i < bandIndices.length; i++) {
         var bandIndex = bandIndices[i];
         timeline.getBand(bandIndex).getEventPainter().setFilterMatcher(filterMatcher);
+        
         timeline.getBand(bandIndex).getEventPainter().setHighlightMatcher(highlightMatcher);
+        console.log(event_list);
     }
     timeline.paint();
 }
@@ -121,3 +125,4 @@ function clearAll(timeline, bandIndices, table) {
     }
     timeline.paint();
 }
+

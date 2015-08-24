@@ -1,7 +1,7 @@
-1|Amelia Earhart Dissappearance|2|1|16|DAY|WEEK|1937,07,03|37.7125689|-122.2197428|/static/img/AmeliaEarhart.jpg|Amelia Earhart Disappears during her attempt to circumnavigate the globe.|YEAR
+1|Amelia Earhart Dissappearance|2|1|16|WEEK|MONTH|1937,06,27|37.7125689|-122.2197428|/static/img/AmeliaEarhart.jpg|Amelia Earhart Disappears during her attempt to circumnavigate the globe.|YEAR
 2|Sinking of the Titanic|5|4|9|MONTH|YEAR|1912,04,15|41.732500|-49.946900|/static/img/Titanic.jpg|Luxery Liner RMS Titanic sank after hitting an iceburg on its maiden voyage.|DECADE 
 3|Martin Luther King Jr. Assassination|16|10|20|DAY|MONTH|1968,04,04|35.1345232|-90.0574813|/static/img/MLK.jpg|Civil rights leader Martin Luther King Jr. Assassinated.|DECADE
-4|JFK Assassination|10|4|20|MINUTE|DAY|1963,11,23,01,00|32.778203|-96.808497|/static/img/JFK.jpg| President John F. Kennedy Assassinated at Dealey Plaza.|YEAR
+4|JFK Assassination|5|4|20|HOUR|DAY|1963,11,22,10,30|32.778203|-96.808497|/static/img/JFK.jpg| President John F. Kennedy Assassinated at Dealey Plaza.|YEAR
 5|Hindenburg Disaster|10|4|20|MONTH|YEAR|1937,05,06|40.0297287|-74.3382333|/static/img/Hindenburg.jpg|Explosion of the blimp, Hindenburg.|DECADE
 6|Abraham Lincoln Assassination|16|10|20|MONTH|YEAR|1865,04,14|38.8969408|-77.0256002|/static/img/Lincoln.jpg|President Abraham Lincoln Assassinated at Ford's Theatre.|DECADE
 7|1972 Summer Olympics Massacre|16|10|20|MONTH|YEAR|1972,09,05|48.1754646|11.551797|/static/img/Olympics.png|Massacre of Olympic athletes and Coaches during the Olympics.|DECADE

@@ -73,7 +73,7 @@ div.hatnote {
 }
 
 .map-canvas {
-    height:600px;
+    height:500px;
     background_color: #CCC;
 }
 
@@ -180,7 +180,7 @@ a.btn_red  {
  
 .topic_map {
 
-    height: 700px;
+    height: 500px;
     display: block; 
     margin-left: auto;
     margin-right: auto;

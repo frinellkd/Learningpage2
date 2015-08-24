@@ -173,18 +173,18 @@ function onLoad() {
 
 } //end of onload function.
 
-// var resizeTimerID = null;
-// function onResize() {
-//     if (resizeTimerID == null) {
-//         resizeTimerID = window.setTimeout(function() {
-//             resizeTimerID = null;
-//             tl.layout();
-//         }, 500);
-//      }
-//  };
+var resizeTimerID = null;
+function onResize() {
+    if (resizeTimerID == null) {
+        resizeTimerID = window.setTimeout(function() {
+            resizeTimerID = null;
+            tl.layout();
+        }, 500);
+     }
+ };
 
+</script> <!--End script for Timeline-->
 
-</script>
 <script>
 
 $('#resetmap').on('click', function(event) {
