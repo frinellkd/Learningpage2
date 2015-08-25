@@ -69,6 +69,7 @@ function cleanString(s) {
 
 var event_highlight_list=[]
 var event_filter_list=[]
+var color_list=[]
 
 function performFiltering(timeline, bandIndices, table) {
     timerID = null;
@@ -82,7 +83,10 @@ function performFiltering(timeline, bandIndices, table) {
         filterMatcher = function(evt) {
             var eventid = evt.getProperty('TopicID');
             if (regex.test(evt.getText()) || regex.test(evt.getDescription())){
-                event_filter_list.push(eventid)};
+                //do nothing
+                }else{
+                    event_filter_list.push(eventid)
+                };
             return regex.test(evt.getText()) || regex.test(evt.getDescription());
         };
     }
@@ -110,6 +114,8 @@ function performFiltering(timeline, bandIndices, table) {
             var regex = regexes[x];
             if (regex != null && (regex.test(text) || regex.test(description))) {
                 event_highlight_list.push(eventid);
+                var highlight = evt.getColor();
+                color_list.push(highlight)
                 return x;
             }
         }
@@ -149,11 +155,12 @@ function clearAll(timeline, bandIndices, table) {
 function gethighlightinfo(){
     
     for (var i = 0; i < event_highlight_list.length; i++) {
-        var eventid = event_highlight_list[i][0];
+        var eventid = event_highlight_list[i];
         var marker = marker_dict[eventid]
-        var color = event_highlight_list[i][1]
-        console.log(marker);
+        var color = color_list[i]
+        ;
         console.log(color)
+        highlightMarker(marker, true)
     }
 }
 
@@ -164,8 +171,17 @@ function getfilterinfo(){
     for (var i = 0; i < event_filter_list.length; i++) {
         var eventid = event_filter_list[i];
         var marker = marker_dict[eventid]
-        
+
         filter_marker_list.push(marker)
         marker.setMap(null)
     }
+}
+
+function highlightMarker(marker, highlight) {
+    var color = "#FE7569";
+    if (highlight) {
+        color = "#0000FF";
+    }
+    
+    marker.setImage(getIcon(color).image);
 }
