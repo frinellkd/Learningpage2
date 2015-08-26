@@ -1,16 +1,7 @@
 {% extends 'base.html' %}
 {% block body %} 
 <body onload="onLoad();" onresize="onResize();">
-   
-
 <h1>Learning Page</h1>
-<!-- html div for timeline: -->
-   
-
-<h2>Topics</h2>
-    <input type='button' id='resetmap' value="RESET MAP"> <br>
-    <div id='map-canvas' class='map-canvas' >Map goes here!</div>
-    
 
     
         
@@ -42,6 +33,7 @@ var mainMap;
 // Creates dictionaries to store marker ids and infobox ids.
 var marker_dict = {};
 var info_dict = {};
+var event_dict={}
 
 
 // MAP FUNCTIONS
@@ -69,10 +61,13 @@ function loadMapMarkers (){
     
     var myLatlng = new google.maps.LatLng({{data.center_lat}}, {{data.center_lng}})
     // attach markers to each topic locaiton retruned in JSON
-    var marker{{data.topic_id}} = new google.maps.Marker({
+    var marker{{data.topic_id}} = new MarkerWithLabel({
         map: mainMap,
         title: '{{ data.topic_title}}',
-        label: '{{data.topic_id}}',
+        labelContent: {{loop.index}},
+        labelAnchor: new google.maps.Point(6,35),
+        labelClass: "labels",
+        labelInBackground: false,
         position: myLatlng,
         query: '{{data.description}}'
                     
@@ -80,7 +75,7 @@ function loadMapMarkers (){
         
         marker{{data.topic_id}}.addListener('click', function(){
         infowindow{{data.topic_id}}.open(mainMap, marker{{data.topic_id}});
-
+        centerTimeline({{loop.index}})
         });
 
         marker_dict['{{data.topic_id}}'] = marker{{data.topic_id}}
@@ -150,6 +145,7 @@ function onLoad() {
           'classname': "topicboxes"    
         })
 
+        event_dict['{{loop.index}}']='{{data.main_date}}'
       
     {% endfor %}
 
@@ -159,6 +155,7 @@ function onLoad() {
 
     tl = Timeline.create(document.getElementById("mytimeline"), bandInfos);
     eventSource.loadJSON(time_data, url);
+
 // upon clicking the event the bubble opens and the map centers and zooms to show where event occurred
     tl.getBand(0).getEventPainter().addOnSelectListener(function(eventID) {
       var evt = tl.getBand(0).getEventSource().getEvent(eventID);
@@ -173,6 +170,10 @@ function onLoad() {
 
 } //end of onload function.
 
+function checkStatus(timeline) {
+        console.log(evt.getProperty());
+}
+
 var resizeTimerID = null;
 function onResize() {
     if (resizeTimerID == null) {
@@ -182,20 +183,40 @@ function onResize() {
         }, 500);
      }
  };
+ function centerTimeline(index) { 
+  tl.getBand(0).setCenterVisibleDate(Timeline.DateTime.parseGregorianDateTime(event_dict[index]))
+};
+
 
 </script> <!--End script for Timeline-->
+
+
+<!-- html div for timeline, buttons and map -->
+    <div id='mytimeline' style="height: 150px; border: 1px solid #aaa"></div>
+    <input type='button' id='resetmap' value="RESET MAP">
+    <input type='button' id='resettimeline' value ='RESET TIMELINE'> 
+    <div class="controls" id="controls"></div>
+    <div id='map-canvas' class='map-canvas' >Map goes here!</div>
+
 
 <script>
 
 $('#resetmap').on('click', function(event) {
         loadmainMap()});
 
+$('#resettimeline').on('click', function(event) {
+        tl.getBand(0).setCenterVisibleDate(Timeline.DateTime.parseGregorianDateTime(1948));
+});        
+$('#checkStatus').on('click', function(event) {
+        checkStatus()
+});     
+
 
 </script>
 
 
-<div id='mytimeline' style="height: 150px; border: 1px solid #aaa"></div>
-<div class="controls" id="controls"></div>        
+
+       
 </body>
 </html>
    

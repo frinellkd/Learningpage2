@@ -148,10 +148,8 @@ Timeline.ClassicTheme._Impl = function() {
         },
         highlightColors: [  // Use with getEventPainter().setHighlightMatcher
                             // See webapp/examples/examples.js
-            "#FFFF00",
-            "#FFC000",
-            "#FF0000",
-            "#0000FF"
+            "#FFFF00"
+            
         ],
         highlightLabelBackground: false, // When highlighting an event, also change the event's label background?
         bubble: {

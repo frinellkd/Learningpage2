@@ -2,10 +2,10 @@
 {% block body %}
 
 <!-- Trigger the modal with a button -->
-<button type="button"  data-toggle="modal" data-target="#watchvideo">Watch a Video</button>
-<button type="button"  data-toggle="modal" data-target="#viewwiki">Read the Wiki</button>
-<button type="button"  data-toggle="modal" data-target="#addeventform">Add an Event</button>
-<button type="button"  data-toggle="modal" data-target="#deleteevent">Remove an Event</button>
+<button type="button" class="infobutton" data-container='body' data-toggle="popover" data-="#watchvideo" data-placement='right'>Watch a Video</button>
+<button type="button" class="infobutton" data-toggle="modal" data-target="#viewwiki">Read the Wiki</button>
+<button type="button" class="infobutton" data-toggle="modal" data-target="#addeventform">Add an Event</button>
+<button type="button" class="infobutton" data-toggle="modal" data-target="#deleteevent">Remove an Event</button>
 
 <body onload="onLoad();" onresize="onResize();">
 
@@ -378,24 +378,10 @@ $('#checkStatus').on('click', function(event) {
 });        
    
 </script>
-<script>
-
-//Function for allowing an individual to remove events if the event is checked
-function removeme(target, marker, eventid, eventtitle) {
-      alert("Do you really want to remove the event: " + eventtitle );
-      // learningpage.db.transaction( function(t){
-      //     t.executeSql("DELETE FROM event_data WHERE event_data_id = ?", [eventid]);
-      //   });
-      loadtopicMap();
-      tl.getBand(0).setCenterVisibleDate(Timeline.DateTime.parseGregorianDateTime('{{time_data.main_date}}'))
-}   
-     
-    
-</script>
 
 <div id="topic_map{{topic_id}}" class="topic_map"></div>
 
-<!--modal for wikipage videos-->
+<!--modal for wikipage-->
 <div id="viewwiki" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -512,11 +498,11 @@ function removeme(target, marker, eventid, eventtitle) {
 </div> 
 
 <!--modal for youtube videos-->
-<div id="watchvideo" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+<div id="watchvideo" class="popover fade" role="dialog">
+  <div class="popover-dialog">
+    <div class="popover-content">
+      <div class="popoverl-header">
+        <button type="button" class="close" data-dismiss="popover">&times;</button>
           <h4 class="modal-title">Select a video by clicking on the picture.</h4>
       </div>
       <div class="modal-body">
@@ -544,8 +530,8 @@ function removeme(target, marker, eventid, eventtitle) {
           </script>
           {% endfor %}
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <div class="popover-footer">
+        <button type="button" class="btn btn-default" data-dismiss="popover">Close</button>
       </div>    
     </div>    
   </div>      

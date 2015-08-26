@@ -2,6 +2,9 @@ function centerSimileAjax(date) {
     tl.getBand(0).setCenterVisibleDate(SimileAjax.DateTime.parseGregorianDateTime(date));
 }
 
+var regexes = [];
+var hasHighlights = false;
+
 function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
     var table = document.createElement("table");
     var tr = table.insertRow(0);
@@ -26,7 +29,7 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
     SimileAjax.DOM.registerEvent(input, "keypress", handler);
     td.appendChild(input);
     
-    for (var i = 0; i < theme.event.highlightColors.length; i++) {
+    for (var i = 0; i < 1; i++) {
         td = tr.insertCell(i + 1);
         
         input = document.createElement("input");
@@ -69,7 +72,7 @@ function cleanString(s) {
 
 var event_highlight_list=[]
 var event_filter_list=[]
-var color_list=[]
+
 
 function performFiltering(timeline, bandIndices, table) {
     timerID = null;
@@ -91,8 +94,7 @@ function performFiltering(timeline, bandIndices, table) {
         };
     }
     
-    var regexes = [];
-    var hasHighlights = false;
+
     for (var x = 1; x < tr.cells.length - 1; x++) {
         var input = tr.cells[x].firstChild;
         var text2 = cleanString(input.value);
@@ -114,8 +116,6 @@ function performFiltering(timeline, bandIndices, table) {
             var regex = regexes[x];
             if (regex != null && (regex.test(text) || regex.test(description))) {
                 event_highlight_list.push(eventid);
-                var highlight = evt.getColor();
-                color_list.push(highlight)
                 return x;
             }
         }
@@ -156,11 +156,11 @@ function gethighlightinfo(){
     
     for (var i = 0; i < event_highlight_list.length; i++) {
         var eventid = event_highlight_list[i];
+        console.log(eventid)
         var marker = marker_dict[eventid]
-        var color = color_list[i]
+        console.log(marker)
         ;
-        console.log(color)
-        highlightMarker(marker, true)
+        
     }
 }
 
@@ -177,11 +177,3 @@ function getfilterinfo(){
     }
 }
 
-function highlightMarker(marker, highlight) {
-    var color = "#FE7569";
-    if (highlight) {
-        color = "#0000FF";
-    }
-    
-    marker.setImage(getIcon(color).image);
-}
