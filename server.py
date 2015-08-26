@@ -65,11 +65,26 @@ def addNewEvent(id):
     return redirect('/view/' + str(id))
 
 
-# @app.route('/login_form')
-# def login():
-#     """shows login form"""
+@app.route("/remove_event/<int:id>")
+def deleteevent(id):
+    delete_data = db.session.query(Event_data.event_data_id, 
+                Event_data.event_title).filter(Event_data.topic_id==id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).all()
 
-#     return render_template("login_form.html")
+    print delete_data
+
+    for data in delete_data:
+        print data.event_data_id
+        event = request.args.get(str(data.event_data_id))
+        print event
+        if event == 'checked':
+            Event_data.query.filter_by(event_data_id=data.event_data_id).delete()
+            
+            
+    flash("Delete completed.")
+    db.session.commit()
+
+
+    return redirect('/view/' + str(id))
 
 @app.route('/login_submit')
 def login_submit():
@@ -195,6 +210,9 @@ def view_topic_selected(id):
 
     time_data = db.session.query(Topic.band1,Topic.band2,Topic.band3,
                              Topic.main_date).filter(Topic.topic_id==id).one()
+
+    delete_data = db.session.query(Event_data.event_data_id, 
+                Event_data.event_title).filter(Event_data.topic_id==id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).all()
     
     data = open(topic_wiki).read()
     wiki_data = json.loads(data)
@@ -213,7 +231,7 @@ def view_topic_selected(id):
 
     return render_template("view.html", youtube_keys=youtube_keys, 
         wiki_data=wiki_data_parsed, wiki_title=wiki_data_title, topic_id=id, 
-        event_data=data_set, map_data=map_data, time_data=time_data)
+        event_data=data_set, map_data=map_data, time_data=time_data, delete_data=delete_data)
 
 @app.route('/users/<int:id>')
 def userinfo(id):

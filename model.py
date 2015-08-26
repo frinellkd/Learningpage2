@@ -138,9 +138,10 @@ class Event_data(db.Model):
     lat = db.Column(Integer)
     lng = db.Column(Integer)
     description = db.Column(String(500))
-    event_date = db.Column(DateTime)
+    event_date = db.Column(DateTime, nullable=False)
     event_title = db.Column(String(100))
-    image= db.Column(String(200))
+    image= db.Column(String(200), default=None)
+    createdby= db.Column(Integer, default=9999)
 
 
     topic = db.relationship("Topic",

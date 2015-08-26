@@ -86,9 +86,10 @@ def load_event_data():
         date = date_treatment(event_date)
         event_title=row[5]
         image=row[6]
+        createdby = -111
 
         event_data=Event_data(topic_id=topic_id, lat=lat, lng=lng, description=info, 
-            event_date=date, event_title=event_title, image=image)
+            event_date=date, event_title=event_title, image=image, createdby=createdby)
 
                 
         db.session.add(event_data)

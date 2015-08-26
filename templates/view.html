@@ -456,7 +456,7 @@ function removeme(target, marker, eventid, eventtitle) {
           <label for="event_desc">DESCRIPTION</label>
           <input type="text" style"width: 200px" id="event_desc" value="Describe the event.  Max 200 characters" required><br>
           * Denotes required fields.<br>
-          <input type="submit" value='ADD TO TIMELINE'>
+          <input type="submit" value='ADD EVENT TO TIMELINE AND MAP'>
         </form>
       </div>
       <div class="modal-footer">
@@ -475,26 +475,32 @@ function removeme(target, marker, eventid, eventtitle) {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add an Event</h4>
+          <h4 class="modal-title">Delete an Event</h4>
       </div>
       <div class="modal-body">
         <!--creating the checkbox list for deleting events -->  
         <div id="remove eventform" class="checkbox">
-          <form>
+          <form name='deleteevent' action="/remove_event/{{topic_id}}">
+            {% if delete_data %}
             <label>
               SELECT AN EVENT TO REMOVE IT 
               <br>
 
-              {%for data in event_data %}
+              {%for data in delete_data %}
                   
                 <input  type="checkbox"
-                      name="event{{loop.index}}"
+                      name="{{data.event_data_id}}"
                       id="{{data.event_data_id}}"
                       class = "checkbox1"
-                      value="{{loop.index}}"
-                      onclick= 'removeme(this, marker_dict["{{data.event_data_id}}"], {{data.event_data_id}}, "{{data.event_title}}")'>({{loop.index}}) {{data.event_title}}<br>
+                      value = "checked"
+                      >{{data.event_title}}<br>
+              
               {% endfor%}
             </label>
+            <input type="submit" value='REMOVE EVENT FROM TIMELINE AND MAP'>
+          {% else %}
+          <label>You can only delete events you have created.</label>
+          {% endif %}
           </form>
         </div>
       </div>
