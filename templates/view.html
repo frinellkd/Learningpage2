@@ -6,6 +6,7 @@
 <button type="button" class="infobutton" data-toggle="modal" data-target="#viewwiki">Read the Wiki</button>
 <button type="button" class="infobutton" data-toggle="modal" data-target="#addeventform">Add an Event</button>
 <button type="button" class="infobutton" data-toggle="modal" data-target="#deleteevent">Remove an Event</button>
+<button type="button" class="infobutton" data-toggle="modal" data-target="#editevent">Edit an Event</button>
 
 <body onload="onLoad();" onresize="onResize();">
 
@@ -390,6 +391,7 @@ $('#checkStatus').on('click', function(event) {
         <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h1 id='wiki_title'>{{wiki_title|safe}}</h1>
           <button type="button" class="infobutton" data-toggle="modal" data-target="#addeventform">Add an Event</button>
+          <button type="button" class="infobutton" data-toggle="modal" data-target="#editevent">Edit an Event</button>
       </div>
       <div class="modal-body">
         <container>
@@ -467,7 +469,7 @@ $('#checkStatus').on('click', function(event) {
       </div>
       <div class="modal-body">
         <!--creating the checkbox list for deleting events -->  
-        <div id="remove eventform" class="checkbox">
+        <div id="removeeventform" class="checkbox">
           <form name='deleteevent' action="/remove_event/{{topic_id}}">
             {% if delete_data %}
             <label>
@@ -539,8 +541,93 @@ $('#checkStatus').on('click', function(event) {
   </div>      
 </div> 
 
+<!--creating the modal for choosing an event to edit-->
+<div id="editevent" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit an Event</h4>
+      </div>
+      <div class="modal-body">
+        <!--creating the checkbox list for deleting events -->  
+        <div id="editeventform" class="checkbox">
+          <form name='editevent'>
+            {% if delete_data %}
+            <label>
+              SELECT AN EVENT TO edit 
+              <br>
 
+              {%for data in delete_data %}
+                  
+                <input  type="checkbox"
+                      name="{{data.event_data_id}}"
+                      id="{{data.event_data_id}}"
+                      class = "checkbox1"
+                      value = "checked"
+                      onClick = "editme(this, {{data.event_data_id}}) "
+                      >{{data.event_title}}<br>
+              
+              {% endfor%}
+            </label>
+            
+          {% else %}
+          <label>You can only edit events you have created.</label>
+          {% endif %}
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>    
+    </div>    
+  </div>      
+</div>
 
+<script>
+function editme(target, event_id){
+    $.getJSON('/edit_event', "event_id=" + event_id, function(edit_data){
 
+    $('#editeventform').html("<form name='addevent' action='/new_event/'>\
+              <label for='event_title'>*EVENT TITLE: </label>\
+          <input type='text' name='event_title' id='event_title' value='Event Title' required><br><label for='event_start_date'>EVENT DATE: </label><br>\
+          <label for='event_day'>DAY: </label>\
+          <select name='event_day' id='event_day'>\
+            {% for n in range(1,32) -%}
+             <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>\
+            {% endfor %}\
+          </select>\
+          <label for='event_month'>MONTH: </label>\
+          <select name='event_month' id='event_month'>\
+            {% for n in range(1,13) -%}
+             <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>\
+            {% endfor %}\
+          </select>\
+          <label for='event_year'>*YEAR: </label>\
+          <input type='text' id='event_year' value='ex: 1972' name='event_year'required><br>\
+          <label for='event_lat'>*Latitude: </label>\
+          <input type='text' id='event_lat' value='37.7886334' name='event_lat' required>\
+          <label for='event_lng'>*Longtitude: </label>\
+          <input type='text' id='event_lng' value='-122.4114752' name='event_lng' required><br>\
+          <label for='event_image'>IMAGE URL: </label>\
+          <input type='text' id='event_img' value='' name='event_img'><br>\
+          <label for='event_desc'>DESCRIPTION</label>\
+          <input type='text' style'width: 200px' id='event_desc' value='Describe the event.  Max 200 characters' required><br>\
+          * Denotes required fields.<br>\
+          <input type='submit' value='Edit Event'></form>")
+
+    $("#editeventform #event_title").val(edit_data.title)
+    $("#editeventform #event_day").val(edit_data.day)
+    $("#editeventform #event_month").val(edit_data.month)
+    $("#editeventform #event_year").val(edit_data.year)
+    $("#editeventform #event_lat").val(edit_data.lat)
+    $("#editeventform #event_lng").val(edit_data.lng)
+    $("#editeventform #event_img").val(edit_data.image)
+    $("#editeventform #event_desc").val(edit_data.description)
+
+    
+  })
+}
+</script>
 </body>
 {% endblock %}

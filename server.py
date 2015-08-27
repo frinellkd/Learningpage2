@@ -65,12 +65,10 @@ def addNewEvent(id):
     return redirect('/view/' + str(id))
 
 
-@app.route("/remove_event/<int:id>")
+@app.route("/remove_event")
 def deleteevent(id):
     delete_data = db.session.query(Event_data.event_data_id, 
                 Event_data.event_title).filter(Event_data.topic_id==id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).all()
-
-    print delete_data
 
     for data in delete_data:
         print data.event_data_id
@@ -85,6 +83,31 @@ def deleteevent(id):
 
 
     return redirect('/view/' + str(id))
+
+@app.route("/edit_event")
+def editevent():
+    event_id = request.args.get("event_id")
+    print "event id: ", event_id
+    
+    edit_data = db.session.query(Event_data.event_data_id, Event_data.lat, 
+        Event_data.lng, Event_data.event_date, Event_data.image, 
+        Event_data.description,
+                Event_data.event_title).filter(Event_data.event_data_id==event_id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).one()
+
+    event_data = {
+            'title': edit_data.event_title,
+            'lat': edit_data.lat,
+            'lng' : edit_data.lng,
+            'event_id' : edit_data.event_data_id,
+            'image' : edit_data.image,
+            'description' : edit_data.description,
+            'day' : '%02d'%edit_data.event_date.day,
+            'month' : '%02d'%edit_data.event_date.month,
+            'year' : str(edit_data.event_date.year)
+
+    }
+
+    return  json.dumps(event_data)
 
 @app.route('/login_submit')
 def login_submit():

@@ -44,7 +44,7 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
     
     td = tr.insertCell(tr.cells.length);
     var button = document.createElement("button");
-    button.innerHTML = "Clear All";
+    button.innerHTML = "Clear Filter/Highlight";
     SimileAjax.DOM.registerEvent(button, "click", function() {
         clearAll(timeline, bandIndices, table);
     });
