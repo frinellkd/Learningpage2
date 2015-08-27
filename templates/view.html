@@ -2,7 +2,7 @@
 {% block body %}
 
 <!-- Trigger the modal with a button -->
-<button type="button" class="infobutton" data-container='body' data-toggle="popover" data-="#watchvideo" data-placement='right'>Watch a Video</button>
+<button type="button" class="infobutton" data-toggle="modal" data-target="#watchvideo">Watch a Video</button>
 <button type="button" class="infobutton" data-toggle="modal" data-target="#viewwiki">Read the Wiki</button>
 <button type="button" class="infobutton" data-toggle="modal" data-target="#addeventform">Add an Event</button>
 <button type="button" class="infobutton" data-toggle="modal" data-target="#deleteevent">Remove an Event</button>
@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 // MAP VARIABLES
 //Create the variable for the topic map itself.
-var topicMap, path;
+var Map, path;
 
 //Create the variables that will be used within the map configuration options.
 //The latitude and longitude of the center of the map.
@@ -58,7 +58,7 @@ function keepMarkersVisible(){
       //  And increase the bounds to take this point
        bounds.extend (LatLngList[i]);
   }
-  topicMap.fitBounds(bounds)
+  Map.fitBounds(bounds)
 }
 // MAP FUNCTIONS
 //The main function that is called when the web page loads
@@ -67,7 +67,7 @@ function loadtopicMap() {
     
   //Creates the map, assigning it to this variable, also loads the map into the div with the id 'topic_map{{topic_id}}', and applies the 'topicMapOptions' (above) to configure this map. 
   
-  topicMap = new google.maps.Map(document.getElementById("topic_map{{topic_id}}"), topicMapOptions); 
+  Map = new google.maps.Map(document.getElementById("topic_map{{topic_id}}"), topicMapOptions); 
 
 
       
@@ -163,8 +163,12 @@ function createPath(){
         {lat: parseFloat(-6.7137206), lng: parseFloat(146.9954825)},
         {lat: parseFloat(0.8072649), lng: parseFloat(-176.6176798)},
       ];   
-  {% endif %}    
-  
+  {% endif %}
+
+  {% if topic_id!=1 and topic_id!=4 %}
+      pathCoordinates = [ ];
+  {% endif%}
+
   var path = new google.maps.Polyline({
     path: pathCoordinates,
     strokeColor: '#FF0000',
@@ -172,7 +176,7 @@ function createPath(){
     strokeWeight: 2
   });
 
-  path.setMap(topicMap);
+  path.setMap(Map);
 }
 
 //Function that loads the map markers.
@@ -193,15 +197,12 @@ function loadMapMarkers (){
         var myLatlng = new google.maps.LatLng({{data.lat}}, {{data.lng}});
 
         // attach markers to each topic locaiton retruned in JSON
-            var marker{{data.event_data_id}} = new MarkerWithLabel({
-                    map: topicMap,
+            var marker{{data.event_data_id}} = new google.maps.Marker({
+                    map: Map,
                     title: '{{data.event_title}}',
-                    labelContent: {{loop.index}},
-                    labelAnchor: new google.maps.Point(6,35),
-                    labelClass: "labels",
-                    labelInBackground: false,
                     position: myLatlng,
-                    query: '{{data.description}}'
+                    query: '{{data.description}}',
+                    icon:  "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red{{loop.index}}.png"
 
                      
                     
@@ -211,12 +212,12 @@ function loadMapMarkers (){
 
             
             marker{{data.event_data_id}}.addListener('click', function(){
-            infowindow{{data.event_data_id}}.open(topicMap, marker{{data.event_data_id}});
+            infowindow{{data.event_data_id}}.open(Map, marker{{data.event_data_id}});
             centerTimeline({{loop.index}});
                 
             });
 
-      marker_dict['{{data.event_data_id}}'] = marker{{data.event_data_id}}
+      marker_dict['{{loop.index}}'] = marker{{data.event_data_id}}
       info_dict['{{data.event_data_id}}'] = infowindow{{data.event_data_id}}
       LatLngList.push(myLatlng)
 
@@ -326,8 +327,8 @@ function onLoad() {
       var evt = tl.getBand(0).getEventSource().getEvent(eventID);
       var data_id = evt.getProperty('TopicID');
       var map_marker = marker_dict[data_id];
-      topicMap.setZoom(17);
-      topicMap.panTo(map_marker.position);
+      Map.setZoom(17);
+      Map.panTo(map_marker.position);
     });
 
    setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1,2], theme); 
@@ -388,6 +389,7 @@ $('#checkStatus').on('click', function(event) {
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h1 id='wiki_title'>{{wiki_title|safe}}</h1>
+          <button type="button" class="infobutton" data-toggle="modal" data-target="#addeventform">Add an Event</button>
       </div>
       <div class="modal-body">
         <container>
@@ -498,11 +500,11 @@ $('#checkStatus').on('click', function(event) {
 </div> 
 
 <!--modal for youtube videos-->
-<div id="watchvideo" class="popover fade" role="dialog">
-  <div class="popover-dialog">
-    <div class="popover-content">
-      <div class="popoverl-header">
-        <button type="button" class="close" data-dismiss="popover">&times;</button>
+<div id="watchvideo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Select a video by clicking on the picture.</h4>
       </div>
       <div class="modal-body">
@@ -530,8 +532,8 @@ $('#checkStatus').on('click', function(event) {
           </script>
           {% endfor %}
       </div>
-      <div class="popover-footer">
-        <button type="button" class="btn btn-default" data-dismiss="popover">Close</button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>    
     </div>    
   </div>      

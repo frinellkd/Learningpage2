@@ -2,15 +2,14 @@ function centerSimileAjax(date) {
     tl.getBand(0).setCenterVisibleDate(SimileAjax.DateTime.parseGregorianDateTime(date));
 }
 
-var regexes = [];
-var hasHighlights = false;
+
 
 function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
     var table = document.createElement("table");
     var tr = table.insertRow(0);
     
     var td = tr.insertCell(0);
-    td.innerHTML = "Filter:";
+    td.innerHTML = "Show Only:";
     
     td = tr.insertCell(1);
     td.innerHTML = "Highlight:";
@@ -60,7 +59,6 @@ function onKeyPress(timeline, bandIndices, table) {
         window.clearTimeout(timerID);
     }
     timerID = window.setTimeout(function() {
-        console.log(event_filter_list, event_highlight_list)
         getfilterinfo()
         gethighlightinfo()
         performFiltering(timeline, bandIndices, table);
@@ -94,7 +92,8 @@ function performFiltering(timeline, bandIndices, table) {
         };
     }
     
-
+    var regexes = [];
+    var hasHighlights = false;
     for (var x = 1; x < tr.cells.length - 1; x++) {
         var input = tr.cells[x].firstChild;
         var text2 = cleanString(input.value);
@@ -144,11 +143,13 @@ function clearAll(timeline, bandIndices, table) {
     }
     for (var i = 0; i < filter_marker_list.length; i++) {
         var marker = filter_marker_list[i];
-        marker.setMap(topicMap)
-        event_filter_list = [];
+        marker.setMap(Map);
     }
-
-
+    
+    loadMapMarkers()
+    event_highlight_list= [];
+    event_filter_list = [];
+    console.log(event_highlight_list, event_filter_list)
     timeline.paint();
 }
 
@@ -156,9 +157,10 @@ function gethighlightinfo(){
     
     for (var i = 0; i < event_highlight_list.length; i++) {
         var eventid = event_highlight_list[i];
-        console.log(eventid)
+        
         var marker = marker_dict[eventid]
         console.log(marker)
+        marker.setIcon("https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_yellow.png")
         ;
         
     }
@@ -177,3 +179,4 @@ function getfilterinfo(){
     }
 }
 
+// theme.event.highlightColors.length

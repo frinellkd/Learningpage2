@@ -29,7 +29,7 @@ var mainMapOptions = {
 };
 
 //Create the variable for the main map itself.
-var mainMap;
+var Map;
 // Creates dictionaries to store marker ids and infobox ids.
 var marker_dict = {};
 var info_dict = {};
@@ -41,7 +41,7 @@ var event_dict={}
 //------------------------------------------------------------------------
 function loadmainMap(){
 
-    mainMap = new google.maps.Map(document.getElementById('map-canvas'),
+    Map = new google.maps.Map(document.getElementById('map-canvas'),
             mainMapOptions);
 
     //Calls the function below to load up all the map markers.
@@ -61,20 +61,22 @@ function loadMapMarkers (){
     
     var myLatlng = new google.maps.LatLng({{data.center_lat}}, {{data.center_lng}})
     // attach markers to each topic locaiton retruned in JSON
-    var marker{{data.topic_id}} = new MarkerWithLabel({
-        map: mainMap,
+    var marker{{data.topic_id}} = new google.maps.Marker({
+        map: Map,
         title: '{{ data.topic_title}}',
         labelContent: {{loop.index}},
-        labelAnchor: new google.maps.Point(6,35),
+        labelAnchor: new google.maps.Point(0,0),
         labelClass: "labels",
-        labelInBackground: false,
+        labelInBackground: true,
         position: myLatlng,
-        query: '{{data.description}}'
+        query: '{{data.description}}',
+        icon: "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red{{loop.index}}.png"
+        
                     
         });        
         
         marker{{data.topic_id}}.addListener('click', function(){
-        infowindow{{data.topic_id}}.open(mainMap, marker{{data.topic_id}});
+        infowindow{{data.topic_id}}.open(Map, marker{{data.topic_id}});
         centerTimeline({{loop.index}})
         });
 
@@ -161,9 +163,9 @@ function onLoad() {
       var evt = tl.getBand(0).getEventSource().getEvent(eventID);
       var data_id = evt.getProperty('TopicID');
       var map_marker = marker_dict[data_id];
-      mainMap.setZoom(17);
-      mainMap.panTo(map_marker.position);
-      info_dict[data_id].open(mainMap, map_marker)
+      Map.setZoom(17);
+      Map.panTo(map_marker.position);
+      info_dict[data_id].open(Map, map_marker)
     });
 
     setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1], theme);
