@@ -38,6 +38,7 @@ var topicMapZoom = {{map_data.zoom}}
 
 // Creates dictionaries to store marker ids and infobox ids.
 var marker_dict = {};
+var marker_dict2 = {};
 var info_dict = {};
 //These options configure the setup of the map. 
 var topicMapOptions = { 
@@ -186,7 +187,7 @@ function loadMapMarkers (){
   {% for data in event_data %}
         {% if data.image %}
         var infowindow{{data.event_data_id}} = new google.maps.InfoWindow({
-            content: '({{data.event_title}}.) {{data.description}}<img src="{{data.image}}"  style="width:48px; height:48px;">'
+            content: '{{data.event_title}} {{data.description}} <img src="{{data.image}}"  style="width:48px; height:48px;">'
             });
 
         {% else %}
@@ -219,6 +220,7 @@ function loadMapMarkers (){
             });
 
       marker_dict['{{loop.index}}'] = marker{{data.event_data_id}}
+      marker_dict2['{{data.event_data_id}}']=marker{{data.event_data_id}}
       info_dict['{{data.event_data_id}}'] = infowindow{{data.event_data_id}}
       LatLngList.push(myLatlng)
 
@@ -327,7 +329,7 @@ function onLoad() {
     tl.getBand(0).getEventPainter().addOnSelectListener(function(eventID) {
       var evt = tl.getBand(0).getEventSource().getEvent(eventID);
       var data_id = evt.getProperty('TopicID');
-      var map_marker = marker_dict[data_id];
+      var map_marker = marker_dict2[data_id];
       Map.setZoom(17);
       Map.panTo(map_marker.position);
     });
@@ -435,7 +437,7 @@ $('#checkStatus').on('click', function(event) {
             {% endfor %}
           </select>
           <label for="event_year">*YEAR: </label>
-          <input type="text" id="event_year" value="ex: 1972" name="event_year"required><br>
+          <input type="text" id="event_year" value="1972" name="event_year"required><br>
           <label for="event_lat">*Latitude: </label>
           <input type="text" id="event_lat" value="37.7886334" name="event_lat" required>
           <label for="event_lng">*Longtitude: </label>
@@ -444,7 +446,7 @@ $('#checkStatus').on('click', function(event) {
           <input type="text" id="event_img" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Martin_Luther_King_Jr_NYWTS.jpg/220px-Martin_Luther_King_Jr_NYWTS.jpg" name="event_img"><br>
 
           <label for="event_desc">DESCRIPTION</label>
-          <input type="text" style"width: 200px" id="event_desc" value="Describe the event.  Max 200 characters" required><br>
+          <input type="text" style"width: 200px" id="event_desc" name="event_desc" value="Describe the event.  Max 200 characters" required><br>
           * Denotes required fields.<br>
           <input type="submit" value='ADD EVENT TO TIMELINE AND MAP'>
         </form>
@@ -588,7 +590,8 @@ $('#checkStatus').on('click', function(event) {
 function editme(target, event_id){
     $.getJSON('/edit_event', "event_id=" + event_id, function(edit_data){
 
-    $('#editeventform').html("<form name='addevent' action='/new_event/'>\
+    $('#editeventform').html("<form name='addevent' action='/update_event/{{topic_id}}'>\
+          <input type='text' id='event_id' name='event_id' value='event_id'></div>\
               <label for='event_title'>*EVENT TITLE: </label>\
           <input type='text' name='event_title' id='event_title' value='Event Title' required><br><label for='event_start_date'>EVENT DATE: </label><br>\
           <label for='event_day'>DAY: </label>\
@@ -612,7 +615,7 @@ function editme(target, event_id){
           <label for='event_image'>IMAGE URL: </label>\
           <input type='text' id='event_img' value='' name='event_img'><br>\
           <label for='event_desc'>DESCRIPTION</label>\
-          <input type='text' style'width: 200px' id='event_desc' value='Describe the event.  Max 200 characters' required><br>\
+          <input type='text' id='event_desc' name='event_desc' value='Describe the event.  Max 200 characters' required><br>\
           * Denotes required fields.<br>\
           <input type='submit' value='Edit Event'></form>")
 
@@ -624,7 +627,7 @@ function editme(target, event_id){
     $("#editeventform #event_lng").val(edit_data.lng)
     $("#editeventform #event_img").val(edit_data.image)
     $("#editeventform #event_desc").val(edit_data.description)
-
+    $("#editeventform #event_id").val(event_id)
     
   })
 }

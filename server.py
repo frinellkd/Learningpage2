@@ -45,6 +45,7 @@ def index():
 @app.route('/new_event/<int:id>')
 def addNewEvent(id):
     """Gets the information obtained from the form and process it for adding to the timeline"""    
+
     event_title = request.args.get("event_title")
     event_day   = request.args.get("event_day")
     event_month = request.args.get("event_month")
@@ -65,7 +66,7 @@ def addNewEvent(id):
     return redirect('/view/' + str(id))
 
 
-@app.route("/remove_event")
+@app.route("/remove_event/<int:id>")
 def deleteevent(id):
     delete_data = db.session.query(Event_data.event_data_id, 
                 Event_data.event_title).filter(Event_data.topic_id==id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).all()
@@ -108,6 +109,35 @@ def editevent():
     }
 
     return  json.dumps(event_data)
+
+@app.route("/update_event/<int:id>")
+def updateEvent(id):
+    """Gets the information obtained from the form and process it for changing the database and updating it."""    
+    
+    event_id = request.args.get("event_id")
+    event_title = request.args.get("event_title")
+    event_day   = request.args.get("event_day")
+    event_month = request.args.get("event_month")
+    event_year  = request.args.get("event_year")
+    event_lat   = request.args.get("event_lat")
+    event_lng   = request.args.get("event_lng")
+    event_image = request.args.get("event_image")
+    event_desc  = request.args.get("event_desc")
+    
+
+    date = datetime(int(event_year), int(event_month), int(event_day))
+
+    update_event = Event_data.query.filter_by(event_data_id=event_id).one()
+    update_event.lat=event_lat
+    update_event.lng=event_lng 
+    update_event.description=event_desc
+    update_event.event_date=date
+    update_event.event_title=event_title
+    update_event.image = event_image
+    
+    db.session.commit()
+
+    return redirect('/view/' + str(id))  
 
 @app.route('/login_submit')
 def login_submit():

@@ -109,11 +109,12 @@ function performFiltering(timeline, bandIndices, table) {
     var highlightMatcher = hasHighlights ? function(evt) {
         var text = evt.getText();
         var description = evt.getDescription();
-        var eventid = evt.getProperty('TopicID');
+       
         
         for (var x = 0; x < regexes.length; x++) {
             var regex = regexes[x];
             if (regex != null && (regex.test(text) || regex.test(description))) {
+                var eventid = evt.getProperty('TopicID');
                 event_highlight_list.push(eventid);
                 return x;
             }

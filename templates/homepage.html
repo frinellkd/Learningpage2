@@ -9,6 +9,8 @@
 <script>
 
 // MAP VARIABLES
+//Create the variable for the main map itself.
+var Map;
 //Create the variables that will be used within the map configuration options.
 //The latitude and longitude of the center of the map.
 var mainMapCenter = new google.maps.LatLng(22.3240816,-19.00143124);
@@ -28,8 +30,18 @@ var mainMapOptions = {
           minZoom: mainMapZoomMin
 };
 
-//Create the variable for the main map itself.
-var Map;
+
+var LatLngList = [];
+
+
+function keepMarkersVisible(){
+      var bounds = new google.maps.LatLngBounds()
+      for (var i = 0, LtLgLen = LatLngList.length; i < LtLgLen; i++) {
+      //  And increase the bounds to take this point
+       bounds.extend (LatLngList[i]);
+  }
+  Map.fitBounds(bounds)
+}
 // Creates dictionaries to store marker ids and infobox ids.
 var marker_dict = {};
 var info_dict = {};
@@ -46,8 +58,9 @@ function loadmainMap(){
 
     //Calls the function below to load up all the map markers.
     loadMapMarkers();
+    keepMarkersVisible();
 
-    };    
+};    
     
     
 
@@ -60,14 +73,11 @@ function loadMapMarkers (){
         });
     
     var myLatlng = new google.maps.LatLng({{data.center_lat}}, {{data.center_lng}})
-    // attach markers to each topic locaiton retruned in JSON
+    // attach markers to each topic locaiton returned in JSON
     var marker{{data.topic_id}} = new google.maps.Marker({
         map: Map,
         title: '{{ data.topic_title}}',
-        labelContent: {{loop.index}},
-        labelAnchor: new google.maps.Point(0,0),
-        labelClass: "labels",
-        labelInBackground: true,
+        
         position: myLatlng,
         query: '{{data.description}}',
         icon: "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red{{loop.index}}.png"
@@ -82,6 +92,7 @@ function loadMapMarkers (){
 
         marker_dict['{{data.topic_id}}'] = marker{{data.topic_id}}
         info_dict['{{data.topic_id}}'] = infowindow{{data.topic_id}}
+        LatLngList.push(myLatlng)
 
     {% endfor %} 
 };
@@ -168,7 +179,7 @@ function onLoad() {
       info_dict[data_id].open(Map, map_marker)
     });
 
-    setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1], theme);
+    setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1,2], theme);
 
 } //end of onload function.
 
