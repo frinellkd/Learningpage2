@@ -117,11 +117,12 @@ def load_topic_data():
         image= row[10]
         description = row[11]
         band3 = row[12]
+        createdby = -111
 
         topic_data=Topic( topic_title=topic_title, zoom=zoom, maxzoom=maxzoom, 
             minzoom=minzoom, band1=band1, band2=band2, main_date=main_date, 
             center_lat=center_lat, center_lng=center_lng, image=image, 
-            description=description, band3=band3)
+            description=description, band3=band3, createdby=createdby)
 
        
 

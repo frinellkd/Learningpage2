@@ -38,9 +38,28 @@ def index():
                 Topic.center_lat, Topic.center_lng, Topic.description,
                 Topic.main_date, Topic.image).order_by(Topic.topic_id).all()
 
-    
+    delete_data = db.session.query(Topic.topic_id, 
+                Topic.topic_title).filter(Topic.createdby >= 0).all()
 
-    return render_template("homepage.html", topic_data=topic_data)
+    return render_template("homepage.html", topic_data=topic_data, delete_data=delete_data)
+
+@app.route("/remove_topic")
+def deletetopic():
+    delete_data = db.session.query(Topic.topic_id).filter(Topic.createdby >= 0).all()
+
+    for data in delete_data:
+        print data.topic_id
+        event = request.args.get(str(data.topic_id))
+        print event
+        if event == 'checked':
+            Topic.query.filter_by(topic_id=data.topic_id).delete()
+            
+            
+    flash("Delete completed.")
+    db.session.commit()
+
+
+    return redirect('/')
 
 @app.route('/new_event/<int:id>')
 def addNewEvent(id):
@@ -65,6 +84,41 @@ def addNewEvent(id):
 
     return redirect('/view/' + str(id))
 
+@app.route('/new_topic')
+def addNewTopic():
+    """Gets the information obtained from the form and process it for adding to the timeline"""    
+
+    topic_title = request.args.get("topic_title")
+    topic_day   = request.args.get("topic_day")
+    topic_month = request.args.get("topic_month")
+    topic_year  = request.args.get("topic_year")
+    topic_lat   = request.args.get("topic_lat")
+    topic_lng   = request.args.get("topic_lng")
+    topic_image = request.args.get("topic_image")
+    topic_desc  = request.args.get("topic_desc")
+
+    date = datetime(int(topic_year), int(topic_month), int(topic_day))
+
+    new_topic = Topic(center_lat=topic_lat, center_lng=topic_lng, description=topic_desc,
+        main_date=date, topic_title=topic_title, image=topic_image)
+
+    print "TOPIC TO ADD:", new_topic
+
+    db.session.add(new_topic)
+    db.session.commit()
+
+    #Adds the new topic as an event
+
+    topic_id = db.session.query(Topic.topic_id).filter(Topic.description
+        ==topic_desc, Topic.main_date==date, Topic.topic_title==topic_title).one()
+
+    new_event = Event_data(topic_id=topic_id[0], lat=topic_lat, lng=topic_lng, description=topic_desc,
+        event_date=date, event_title=topic_title, image=topic_image )
+
+    db.session.add(new_event)
+    db.session.commit()
+
+    return redirect('/')
 
 @app.route("/remove_event/<int:id>")
 def deleteevent(id):
@@ -242,36 +296,82 @@ def log_out():
     flash('You are logged out.')
     return redirect('/')       
 
+
+#######################################################
+
 @app.route('/view/<int:id>')
 def view_topic_selected(id):
 
     """ Takes the topic id from the URL and uses it to locate correct information to display"""
-    # gets all the the youtube keys from the database
-    youtube_keys = db.session.query(Topic_video.youtube_video_key).filter(Topic_video.topic_id == id).all()
-    # gets the path for the wiki page from the database
-    topic_selected_wiki = db.session.query(Topic_wiki.wiki_json).filter(Topic_wiki.topic_id == id).one()
-    # prepares the path by stripping off a retrun (will do this before populating the database in the future)
-    topic_wiki = str(topic_selected_wiki.wiki_json).strip()
+    try:
+        # gets all the the youtube keys from the database
+        youtube_keys = db.session.query(Topic_video.youtube_video_key).filter(Topic_video.topic_id == id).all()
+        
+        # gets the path for the wiki page from the database
+        topic_selected_wiki = db.session.query(Topic_wiki.wiki_json).filter(Topic_wiki.topic_id == id).one()
 
+        data = open(topic_wiki).read()
+        wiki_data = json.loads(data)
+        wiki_data_title = wiki_data['parse']['title']
+        wiki_data_parsed = wiki_data['parse']['text']['*']
+
+        # prepares the path by stripping off a retrun (will do this before populating the database in the future)
+        topic_wiki = str(topic_selected_wiki.wiki_json).strip()
+
+    except:
+        print "has no youtube and wiki!"
+        youtube_keys = None
+        topic_wiki = None
+        wiki_data_parsed = None
+        wiki_data_title = None
+
+        # map_data = db.session.query(Topic.zoom, Topic.maxzoom, Topic.minzoom,
+        #         Topic.center_lat, Topic.center_lng).filter(Topic.topic_id==id).one()
+
+        # time_data = db.session.query(Topic.band1,Topic.band2,Topic.band3,
+        #                      Topic.main_date).filter(Topic.topic_id==id).one()
+
+        # delete_data = db.session.query(Event_data.event_data_id, 
+        #         Event_data.event_title).filter(Event_data.topic_id==id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).all()
+        # # logs a instance of a topic being visited if the person is logged on.
+        
+        # data_set = db.session.query(Event_data.topic_id, Event_data.event_title, 
+        #         Event_data.lat, Event_data.lng, Event_data.description,
+        #         Event_data.event_date, Event_data.image, Event_data.event_data_id,
+        #         Topic.topic_title).join(Topic).filter(Event_data.topic_id==id).order_by(Event_data.event_date).all()
+
+
+        # if 'user_id' in session:
+        #     user_id=session['user_id']
+        #     v_info = db.session.query(Visit.visit_id).filter_by(user_id=user_id).all()
+        #     current_visit = v_info[-1][0]
+        #     t_visited = Topic_visited(visit_id=current_visit, topic_id=id)
+        #     db.session.add(t_visited)
+        #     db.session.commit()
+
+
+        # return render_template("view.html", topic_id=id, 
+        #     map_data=map_data, time_data=time_data, delete_data=delete_data, event_data=data_set)
+
+
+    
     data_set = db.session.query(Event_data.topic_id, Event_data.event_title, 
                 Event_data.lat, Event_data.lng, Event_data.description,
                 Event_data.event_date, Event_data.image, Event_data.event_data_id,
                 Topic.topic_title).join(Topic).filter(Event_data.topic_id==id).order_by(Event_data.event_date).all()
 
+    delete_data = db.session.query(Event_data.event_data_id, 
+                Event_data.event_title).filter(Event_data.topic_id==id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).all()
+ 
     map_data = db.session.query(Topic.zoom, Topic.maxzoom, Topic.minzoom,
                 Topic.center_lat, Topic.center_lng).filter(Topic.topic_id==id).one()
 
     time_data = db.session.query(Topic.band1,Topic.band2,Topic.band3,
                              Topic.main_date).filter(Topic.topic_id==id).one()
 
-    delete_data = db.session.query(Event_data.event_data_id, 
-                Event_data.event_title).filter(Event_data.topic_id==id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).all()
-    
-    data = open(topic_wiki).read()
-    wiki_data = json.loads(data)
-    wiki_data_title = wiki_data['parse']['title']
-    wiki_data_parsed = wiki_data['parse']['text']['*']
-    
+    topic_title = db.session.query(Topic.topic_title).filter(Topic.topic_id==id).one()
+
+
     # logs a instance of a topic being visited if the person is logged on.
     if 'user_id' in session:
         user_id=session['user_id']
@@ -280,11 +380,19 @@ def view_topic_selected(id):
         t_visited = Topic_visited(visit_id=current_visit, topic_id=id)
         db.session.add(t_visited)
         db.session.commit()
-    
+
+
+    print "DATA SET:", data_set    
 
     return render_template("view.html", youtube_keys=youtube_keys, 
         wiki_data=wiki_data_parsed, wiki_title=wiki_data_title, topic_id=id, 
-        event_data=data_set, map_data=map_data, time_data=time_data, delete_data=delete_data)
+        event_data=data_set, map_data=map_data, time_data=time_data, delete_data=delete_data, topic_title=topic_title)
+
+
+
+#########################################################
+
+
 
 @app.route('/users/<int:id>')
 def userinfo(id):

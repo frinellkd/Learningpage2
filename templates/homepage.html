@@ -3,7 +3,10 @@
 <body onload="onLoad();" onresize="onResize();">
 <h1>Learning Page</h1>
 
-    
+<!-- Trigger the modal with a button -->
+<button type="button" class="infobutton" data-toggle="modal" data-target="#addtopicform">Add a Topic</button>
+<button type="button" class="infobutton" data-toggle="modal" data-target="#deletetopic">Remove a Topic</button>
+<button type="button" class="infobutton" data-toggle="modal" data-target="#edittopic">Edit a Topic</button>   
         
 <!--Begin script for map -->
 <script>
@@ -227,10 +230,97 @@ $('#checkStatus').on('click', function(event) {
 
 </script>
 
+<!--modal for adding an event -->
+<div id="addtopicform" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add a Topic</h4>
+      </div>
+      <div class="modal-body">
+          <form name='addtopic' action="/new_topic">
+          <label for="topic_title">*TOPIC TITLE: </label>
+          <input type="text" name='topic_title'id="topic_title" value="topic Title" required><br>
+          <label for="topic_start_date">DATE: </label><br>
+          <label for="topic_day">DAY: </label>
+          <select name="topic_day" id="topic_day">
+            {% for n in range(1,32) %}
+             <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
+            {% endfor %}
+          </select>  
+          <label for="topic_month">MONTH: </label>
+          <select name="topic_month" id="topic_month">
+            {% for n in range(1,13) %}
+             <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
+            {% endfor %}
+          </select>
+          <label for="topic_year">*YEAR: </label>
+          <input type="text" id="topic_year" value="1972" name="topic_year"required><br>
+          <label for="topic_lat">*Latitude: </label>
+          <input type="text" id="topic_lat" value="37.7886334" name="topic_lat" required>
+          <label for="topic_lng">*Longtitude: </label>
+          <input type="text" id="topic_lng" value="-122.4114752" name="topic_lng" required><br>
+          <label for="topic_image">IMAGE URL: </label>
+          <input type="text" id="topic_img" value="" name="topic_img"><br>
 
+          <label for="topic_desc">DESCRIPTION</label>
+          <input type="text" style"width: 200px" id="topic_desc" name="topic_desc" value="Describe the topic.  Max 200 characters" required><br>
+          * Denotes required fields.<br>
+          <input type="submit" value='ADD TOPIC TO TIMELINE AND MAP'>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>    
+    </div>    
+  </div>      
+</div> 
+
+<!--creating the modal for deleting an event-->
+<div id="deletetopic" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Delete a Title</h4>
+      </div>
+      <div class="modal-body">
+        <!--creating the checkbox list for deleting events -->  
+        <div id="removetopicform" class="checkbox">
+          <form name='deleteevent' action="/remove_topic">
+            {% if delete_data %}
+            <label>
+              SELECT A TOPIC TO REMOVE IT 
+              <br>
+
+              {%for data in delete_data %}
+                  
+                <input  type="checkbox"
+                      name="{{data.topic_id}}"
+                      id="{{data.topic_id}}"
+                      class = "checkbox1"
+                      value = "checked"
+                      >{{data.topic_title}}<br>
+              
+              {% endfor%}
+            </label>
+            <input type="submit" value='REMOVE TOPIC FROM TIMELINE AND MAP'>
+          {% else %}
+          <label>You can only delete topics you have created.</label>
+          {% endif %}
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>    
+    </div>    
+  </div>      
+</div> 
 
        
 </body>
 </html>
-   
+
 {% endblock %}

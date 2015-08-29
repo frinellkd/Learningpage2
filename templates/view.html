@@ -77,7 +77,7 @@ function loadtopicMap() {
   loadMapMarkers();
   createPath();
   keepMarkersVisible();
-
+  
   };
 
 // Function that creates a path
@@ -359,7 +359,7 @@ function centerTimeline(index) {
 </script> <!--End script for Timeline-->
 
 
-<h1>{{wiki_title|safe}}</h1>
+<h1>{{topic_title.topic_title}}</h1>
  
 
 <div class="controls" id="controls"></div>
@@ -443,7 +443,7 @@ $('#checkStatus').on('click', function(event) {
           <label for="event_lng">*Longtitude: </label>
           <input type="text" id="event_lng" value="-122.4114752" name="event_lng" required><br>
           <label for="event_image">IMAGE URL: </label>
-          <input type="text" id="event_img" value="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Martin_Luther_King_Jr_NYWTS.jpg/220px-Martin_Luther_King_Jr_NYWTS.jpg" name="event_img"><br>
+          <input type="text" id="event_img" value="" name="event_img"><br>
 
           <label for="event_desc">DESCRIPTION</label>
           <input type="text" style"width: 200px" id="event_desc" name="event_desc" value="Describe the event.  Max 200 characters" required><br>
@@ -512,6 +512,8 @@ $('#checkStatus').on('click', function(event) {
           <h4 class="modal-title">Select a video by clicking on the picture.</h4>
       </div>
       <div class="modal-body">
+
+        {% if youtube_keys != None %}
           {% for key in youtube_keys %}
 
           <div class="video_wrapper" id='thumbnails'>
@@ -535,6 +537,8 @@ $('#checkStatus').on('click', function(event) {
 
           </script>
           {% endfor %}
+        {% endif %}
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

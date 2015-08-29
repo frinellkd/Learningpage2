@@ -84,17 +84,18 @@ class Topic(db.Model):
 
     topic_id = db.Column(Integer, autoincrement=True, primary_key=True)
     topic_title = db.Column(String(100), nullable=False)
-    zoom = db.Column(Integer)
-    maxzoom = db.Column(Integer)
-    minzoom = db.Column(Integer)
-    band1 = db.Column(String(20))
-    band2 = db.Column(String(20))
+    zoom = db.Column(Integer, default = 10)
+    maxzoom = db.Column(Integer, default=21)
+    minzoom = db.Column(Integer, default=2)
+    band1 = db.Column(String(20), default='DAY')
+    band2 = db.Column(String(20), default='MONTH')
     main_date = db.Column(DateTime)
     center_lat = db.Column(Integer)
     center_lng = db.Column(Integer)
-    image= db.Column(String(200))
+    image= db.Column(String(200), default='/static/img/default.png')
     description = db.Column(String(500))
-    band3 = db.Column(String(20))
+    band3 = db.Column(String(20), default='YEAR')
+    createdby= db.Column(Integer, default=9999)
 
 class Topic_wiki(db.Model):
 
