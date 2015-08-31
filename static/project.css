@@ -210,3 +210,6 @@ a.btn_red  {
     text-align: center;
     width: 12px;
 }
+.timeline-band-0 .timeline-band-layer-inner {
+       background: url("/static/img/lovefield.jpg") scroll 0 0 #EEEEEE
+}

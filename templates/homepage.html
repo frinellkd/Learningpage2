@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% block body %} 
-<body onload="onLoad();" onresize="onResize();">
-<h1>Learning Page</h1>
+<body onload="onLoad();" onresize="onResize();" class="mainbody">
+<h1>Arranging History</h1>
 
 <!-- Trigger the modal with a button -->
-<button type="button" class="infobutton" data-toggle="modal" data-target="#addtopicform">Add a Topic</button>
-<button type="button" class="infobutton" data-toggle="modal" data-target="#deletetopic">Remove a Topic</button>
-<button type="button" class="infobutton" data-toggle="modal" data-target="#edittopic">Edit a Topic</button>   
+<button type="button" class="infobutton" data-toggle="modal" data-target="#addtopicform" title="Add a new topic to the timeline and map.">Add a Topic</button>
+<button type="button" class="infobutton" data-toggle="modal" data-target="#deletetopic" title="Remove a topic you created.">Remove a Topic</button>
         
 <!--Begin script for map -->
 <script>
@@ -208,11 +207,11 @@ function onResize() {
 
 
 <!-- html div for timeline, buttons and map -->
-    <div id='mytimeline' style="height: 150px; border: 1px solid #aaa"></div>
-    <input type='button' id='resetmap' value="RESET MAP">
-    <input type='button' id='resettimeline' value ='RESET TIMELINE'> 
-    <div class="controls" id="controls"></div>
-    <div id='map-canvas' class='map-canvas' >Map goes here!</div>
+    <div id='mytimeline' style="height: 150px; border: 1px solid #aaa" title="Click on a timeline event to interact with the timeline."></div>
+    <input type='button' id='resetmap' value="RESET MAP" title="Reset the map to the original status.">
+    <input type='button' id='resettimeline' value ='RESET TIMELINE' title="Reset the timeline to the original position."> 
+    <div class="controls" id="controls" title="Filter or highlight the items in the timeline and map."></div>
+    <div id='map-canvas' class='map-canvas' title="Click on a map maker to interact with the timeline." >Map goes here!</div>
 
 
 <script>

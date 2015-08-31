@@ -2,7 +2,7 @@
 {% block body %}
 
 <!-- Trigger the modal with a button -->
-<button type="button" class="infobutton" data-toggle="modal" data-target="#watchvideo">Watch a Video</button>
+<button class="button" class='infobuttonm' data-toggle="modal" data-target=".watchvideo">Watch a Video</button>
 <button type="button" class="infobutton" data-toggle="modal" data-target="#viewwiki">Read the Wiki</button>
 <button type="button" class="infobutton" data-toggle="modal" data-target="#addeventform">Add an Event</button>
 <button type="button" class="infobutton" data-toggle="modal" data-target="#deleteevent">Remove an Event</button>
@@ -504,48 +504,72 @@ $('#checkStatus').on('click', function(event) {
 </div> 
 
 <!--modal for youtube videos-->
-<div id="watchvideo" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<div class="modal fade watchvideo" tabindex="-1" role="dialog" title='Click on an image to select a video to play.'>
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Select a video by clicking on the picture.</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+  <!-- Wrapper for slides -->
+  
+  <div id = "myCarosel" class="carousel-inner" tooltip="Click on an image to play corresponding video.">
+    {% if youtube_keys != None %}
+      {% for item in youtube_keys[0:1] %}
+      <div class="item active">
+        <img class="img-responsive" src='http://img.youtube.com/vi/{{item.youtube_video_key}}/hqdefault.jpg' id='1' >
+        <div class="carousel-caption">
+        {{item.video_title}}
+        </div>
       </div>
-      <div class="modal-body">
+      {% endfor %}
+    {% if  youtube_keys|length > 1 %}
+      {% for item in youtube_keys[1:] %}  
+      <div class="item">
+        <img class="img-responsive" src='http://img.youtube.com/vi/{{item.youtube_video_key}}/hqdefault.jpg' id='{{loop.index +1}}'>
+        <div class="carousel-caption">
+        {{item.video_title}}
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+    {% endif %}
+    <div id='vph'></div>
+  
+    </div>
 
-        {% if youtube_keys != None %}
-          {% for key in youtube_keys %}
-
-          <div class="video_wrapper" id='thumbnails'>
-                  <!--Creates images that can be clicked to start corresponding video-->
-                  <img id='thumbnail_{{key.youtube_video_key}}' src='http://img.youtube.com/vi/{{key.youtube_video_key}}/hqdefault.jpg'/ >
-          </div >
-
-          <div id='vph'></div>
-
-
-
-          <script>
+  <script>
+  {% if youtube_keys != None %}
+      {% for key in youtube_keys %}
+          
               // embeds a video upon clicking the image related to the video
           var embedVid_{{key.youtube_video_key}} = '<iframe width="560" height="315" src="https://www.youtube.com/embed/{{key.youtube_video_key}}?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>'
 
-          $('#thumbnail_{{key.youtube_video_key}}').on("click", function(evt) {
+          $('#{{loop.index}}').on("click", function(evt) {
                   evt.preventDefault();
                   $("#vph").html(embedVid_{{key.youtube_video_key}});
           });
 
 
-          </script>
-          {% endfor %}
-        {% endif %}
+    {% endfor %}
+  {% endif %}
+    
+</script>
 
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>    
-    </div>    
-  </div>      
-</div> 
+    </div>
+  </div>
+</div>
+
+
+<!-- end of video carousel modal-->
+
 
 <!--creating the modal for choosing an event to edit-->
 <div id="editevent" class="modal fade" role="dialog">

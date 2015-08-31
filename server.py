@@ -305,20 +305,29 @@ def view_topic_selected(id):
     """ Takes the topic id from the URL and uses it to locate correct information to display"""
     try:
         # gets all the the youtube keys from the database
-        youtube_keys = db.session.query(Topic_video.youtube_video_key).filter(Topic_video.topic_id == id).all()
-        
+        youtube_keys = db.session.query(Topic_video.youtube_video_key, Topic_video.video_title).filter(Topic_video.topic_id == id).all()
+        print "youtube_keys: ", youtube_keys
         # gets the path for the wiki page from the database
         topic_selected_wiki = db.session.query(Topic_wiki.wiki_json).filter(Topic_wiki.topic_id == id).one()
+
+        print "topic_selected_wiki", topic_selected_wiki
+
+        topic_wiki = str(topic_selected_wiki.wiki_json).strip()
 
         data = open(topic_wiki).read()
         wiki_data = json.loads(data)
         wiki_data_title = wiki_data['parse']['title']
         wiki_data_parsed = wiki_data['parse']['text']['*']
 
-        # prepares the path by stripping off a retrun (will do this before populating the database in the future)
-        topic_wiki = str(topic_selected_wiki.wiki_json).strip()
+        print "wiki_data_parsed", wiki_data_parsed
 
-    except:
+        # prepares the path by stripping off a retrun (will do this before populating the database in the future)
+        
+
+        print "topic_wiki: ", topic_wiki
+
+    except Exception as e:
+        print e
         print "has no youtube and wiki!"
         youtube_keys = None
         topic_wiki = None
@@ -382,7 +391,7 @@ def view_topic_selected(id):
         db.session.commit()
 
 
-    print "DATA SET:", data_set    
+        
 
     return render_template("view.html", youtube_keys=youtube_keys, 
         wiki_data=wiki_data_parsed, wiki_title=wiki_data_title, topic_id=id, 
