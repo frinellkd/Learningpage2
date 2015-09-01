@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block body %} 
 <body onload="onLoad();" onresize="onResize();" class="mainbody">
-<h1>Arranging History</h1>
 
-<!-- Trigger the modal with a button -->
-<button type="button" class="infobutton" data-toggle="modal" data-target="#addtopicform" title="Add a new topic to the timeline and map.">Add a Topic</button>
-<button type="button" class="infobutton" data-toggle="modal" data-target="#deletetopic" title="Remove a topic you created.">Remove a Topic</button>
+
+
         
 <!--Begin script for map -->
 <script>
@@ -29,7 +27,9 @@ var mainMapOptions = {
           //The type of map. In addition to ROADMAP, the other 'premade' map styles are SATELLITE, TERRAIN and HYBRID. 
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           maxZoom: mainMapZoomMax,
-          minZoom: mainMapZoomMin
+          minZoom: mainMapZoomMin,
+          styles: [{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"all","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.fill","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"all","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","elementType":"all","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]}]
+
 };
 
 
@@ -157,7 +157,9 @@ function onLoad() {
           'TopicID': "{{data.topic_id}}",
           'durationEvent': false,
           'title':"({{loop.index}}){{data.topic_title}}",
-          'classname': "topicboxes"    
+          'classname': "topicboxes",
+          'icon':"/static/img/dark-red-circle.png",
+          'hash-color': "red",    
         })
 
         event_dict['{{loop.index}}']='{{data.main_date}}'
@@ -207,13 +209,30 @@ function onResize() {
 
 
 <!-- html div for timeline, buttons and map -->
-    <div id='mytimeline' style="height: 150px; border: 1px solid #aaa" title="Click on a timeline event to interact with the timeline."></div>
-    <input type='button' id='resetmap' value="RESET MAP" title="Reset the map to the original status.">
-    <input type='button' id='resettimeline' value ='RESET TIMELINE' title="Reset the timeline to the original position."> 
-    <div class="controls" id="controls" title="Filter or highlight the items in the timeline and map."></div>
-    <div id='map-canvas' class='map-canvas' title="Click on a map maker to interact with the timeline." >Map goes here!</div>
 
+<div class="container-fluid">
+  <div class='row'>
+    <div class='boxForTimeline'>
+      <div id='mytimeline' style="height: 150px" title="Click on a timeline event to find location on the map."></div>
+    </div>
+  </div>
+  <!--buttons for controlling behavior of map and timeline -->
+  <div class='row btn-group'>  
+      <div class='btn-group' id="mapbuttons">
+      <button type='button' id='resetmap'  title="Reset the map to the original status." class='btn btn-default'>Reset Map</button>
+      <button type='button' id='resettimeline' title="Reset the timeline to the original position." class='btn btn-default'>Reset Timeline</button>
+      <button type="button" class='btn btn-default' data-toggle="modal" data-target="#addtopicform" title="Add a new topic to the timeline and map.">Add Topic</button>
+      <button type="button" class='btn btn-default' data-toggle="modal" data-target="#deletetopic" title="Remove a topic you created.">Remove Topic</button>
+      <div class="controls btn-group" id="controls" title="Filter or highlight the items in the timeline and map."></div>
+    </div>
+  </div>
 
+  <div class='row'>  
+    <div class="mapbox">
+      <div id='map-canvas' class='map-canvas' title="Click on a map maker to find when the event at that location occurred." >Map goes here!</div>
+    </div>
+  </div>
+</div>  
 <script>
 
 $('#resetmap').on('click', function(event) {
@@ -237,41 +256,43 @@ $('#checkStatus').on('click', function(event) {
         <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add a Topic</h4>
       </div>
-      <div class="modal-body">
-          <form name='addtopic' action="/new_topic">
-          <label for="topic_title">*TOPIC TITLE: </label>
-          <input type="text" name='topic_title'id="topic_title" value="topic Title" required><br>
-          <label for="topic_start_date">DATE: </label><br>
-          <label for="topic_day">DAY: </label>
-          <select name="topic_day" id="topic_day">
-            {% for n in range(1,32) %}
-             <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
-            {% endfor %}
-          </select>  
-          <label for="topic_month">MONTH: </label>
-          <select name="topic_month" id="topic_month">
-            {% for n in range(1,13) %}
-             <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
-            {% endfor %}
-          </select>
-          <label for="topic_year">*YEAR: </label>
-          <input type="text" id="topic_year" value="1972" name="topic_year"required><br>
-          <label for="topic_lat">*Latitude: </label>
-          <input type="text" id="topic_lat" value="37.7886334" name="topic_lat" required>
-          <label for="topic_lng">*Longtitude: </label>
-          <input type="text" id="topic_lng" value="-122.4114752" name="topic_lng" required><br>
-          <label for="topic_image">IMAGE URL: </label>
-          <input type="text" id="topic_img" value="" name="topic_img"><br>
+        <div class="modal-body">
+          <form class='form-group' name='addtopic' action="/new_topic">
+          <div class='form-group'>  
+            <label for="topic_title">*TOPIC TITLE: </label>
+            <input type="text" class='form-control' name='topic_title'id="topic_title" value="Hackbright Opens its Doors" required><br>
+            <label for="topic_start_date">DATE: </label><br>
+            <label for="topic_day">DAY: </label>
+            <select name="topic_day" id="topic_day" class='form-control'>
+              {% for n in range(1,32) %}
+               <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
+              {% endfor %}
+            </select>  
+            <label for="topic_month">MONTH: </label>
+            <select name="topic_month" id="topic_month" class='form-control'>
+              {% for n in range(1,13) %}
+               <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
+              {% endfor %}
+            </select>
+            <label for="topic_year">*YEAR: </label>
+            <input type="text" id="topic_year" value="2012" name="topic_year"required class='form-control'><br>
+            <label for="topic_lat">*Latitude: </label>
+            <input type="text" id="topic_lat" value="37.7886334" name="topic_lat" required class='form-control'>
+            <label for="topic_lng">*Longtitude: </label>
+            <input type="text" id="topic_lng" value="-122.4114752" name="topic_lng" required class='form-control'><br>
+            <label for="topic_image">IMAGE URL: </label>
+            <input type="text" id="topic_img" value="/static/img/Hackbright.png" name="topic_img" class='form-control'><br>
 
-          <label for="topic_desc">DESCRIPTION</label>
-          <input type="text" style"width: 200px" id="topic_desc" name="topic_desc" value="Describe the topic.  Max 200 characters" required><br>
-          * Denotes required fields.<br>
-          <input type="submit" value='ADD TOPIC TO TIMELINE AND MAP'>
+            <label for="topic_desc">DESCRIPTION</label>
+            <input type="text" style"width: 200px" id="topic_desc" name="topic_desc" value="Hackbright opens its doors, changing the ratio." class='form-control' required><br>
+            * Denotes required fields.<br>
+            <input type="submit" class='btn btn-default' value='ADD TOPIC TO TIMELINE AND MAP' class='form-control'>
+          </div>  
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal" class='form-control'>Close</button>
+    </div>    
     </div>    
   </div>      
 </div> 
@@ -316,7 +337,7 @@ $('#checkStatus').on('click', function(event) {
       </div>    
     </div>    
   </div>      
-</div> 
+</div>
 
        
 </body>

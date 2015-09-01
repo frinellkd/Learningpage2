@@ -8,11 +8,11 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
     var table = document.createElement("table");
     var tr = table.insertRow(0);
     
-    var td = tr.insertCell(0);
-    td.innerHTML = "Show Only:";
+    // var td = tr.insertCell(0);
+    // td.innerHTML = "Show Only:";
     
-    td = tr.insertCell(1);
-    td.innerHTML = "Highlight:";
+    // td = tr.insertCell(1);
+    // td.innerHTML = "Highlight:";
     
     var handler = function(elmt, evt, target) {
         onKeyPress(timeline, bandIndices, table);
@@ -25,6 +25,8 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
     
     var input = document.createElement("input");
     input.type = "text";
+    input.className="form-control";
+    input.placeholder="Show Only"
     SimileAjax.DOM.registerEvent(input, "keypress", handler);
     td.appendChild(input);
     
@@ -33,6 +35,8 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
         
         input = document.createElement("input");
         input.type = "text";
+        input.className="form-control";
+        input.placeholder="Highlight"
         SimileAjax.DOM.registerEvent(input, "keypress", handler);
         td.appendChild(input);
         
@@ -40,17 +44,19 @@ function setupFilterHighlightControls(div, timeline, bandIndices, theme) {
         divColor.style.height = "0.5em";
         divColor.style.background = theme.event.highlightColors[i];
         td.appendChild(divColor);
-    }
     
+
     td = tr.insertCell(tr.cells.length);
     var button = document.createElement("button");
     button.innerHTML = "Clear Filter/Highlight";
+    button.className="btn btn-default";
     SimileAjax.DOM.registerEvent(button, "click", function() {
         clearAll(timeline, bandIndices, table);
     });
     td.appendChild(button);
     
     div.appendChild(table);
+}
 }
 
 var timerID = null;

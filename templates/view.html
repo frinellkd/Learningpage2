@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<!-- Trigger the modal with a button -->
-<button class="button" class='infobuttonm' data-toggle="modal" data-target=".watchvideo">Watch a Video</button>
-<button type="button" class="infobutton" data-toggle="modal" data-target="#viewwiki">Read the Wiki</button>
-<button type="button" class="infobutton" data-toggle="modal" data-target="#addeventform">Add an Event</button>
-<button type="button" class="infobutton" data-toggle="modal" data-target="#deleteevent">Remove an Event</button>
-<button type="button" class="infobutton" data-toggle="modal" data-target="#editevent">Edit an Event</button>
 
-<body onload="onLoad();" onresize="onResize();">
+<body onload="onLoad();" onresize="onResize();" >
 
 <script>
 //For handling wikipedia links
@@ -46,6 +40,7 @@ var topicMapOptions = {
           zoom: topicMapZoom,
           //The type of map. In addition to ROADMAP, the other 'premade' map styles are SATELLITE, TERRAIN and HYBRID. 
           mapTypeId: google.maps.MapTypeId.ROADMAP,
+          styles: [{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"all","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.fill","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.landcover","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"all","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","elementType":"all","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]}]
           
           
 };
@@ -204,11 +199,9 @@ function loadMapMarkers (){
                     title: '{{data.event_title}}',
                     position: myLatlng,
                     query: '{{data.description}}',
-                    icon:  "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red{{loop.index}}.png"
+                    icon:  "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red{{loop.index}}.png",
+                    
 
-                     
-                    
-                    
             });  
 
 
@@ -253,7 +246,7 @@ function onLoad() {
         width:          "70%",
         timeZone:       -8, 
         intervalUnit:   Timeline.DateTime.{{time_data.band1}}, 
-        intervalPixels: 600,
+        intervalPixels: 400,
         theme:          theme
         }),
      Timeline.createBandInfo({
@@ -312,7 +305,8 @@ function onLoad() {
           'durationEvent': false,
           'title':"({{loop.index}}){{data.event_title}}",
           'classname': "eventboxes" ,
-          'highlightColor': false   
+          'highlightColor': false,
+          'icon':"/static/img/dark-red-circle.png"   
         })
 
       event_dict['{{loop.index}}']='{{data.event_date}}' 
@@ -358,16 +352,39 @@ function centerTimeline(index) {
 
 </script> <!--End script for Timeline-->
 
+<div class='row'>
+<div class='topictitle'>{{topic_title.topic_title}}</div>
+</div>
+<div class='row'>
+<!-- Trigger the modal with a button -->
+  <div class='btn-group'>
+    <button class="button btn btn-default" data-toggle="modal" data-target=".watchvideo">Watch a Video</button>
+    <button class="button btn btn-default" data-toggle="modal" data-target="#viewwiki">Read the Wiki</button>
+  </div>
+</div>
 
-<h1>{{topic_title.topic_title}}</h1>
- 
+<div class='row'>
+  <div class="boxForTimeline">
+    <div id='mytimeline' style="height: 150px" title="Click on a timeline event to find location on the map."></div>
+  </div>
+</div>
 
-<div class="controls" id="controls"></div>
-<div id='mytimeline' style="height: 300px; border: 1px solid #aaa"></div>
-<input type='button' id='resetmap' value="RESET MAP">
-<input type='button' id='resettimeline' value ='RESET TIMELINE'>
+<div class='row btn-group2'>
+  <div class='btn-group' id='bctm'>
+    <button type='button' class='btn btn-default' id='resetmap' title="Reset the map to the original status.">Reset Map</button>
+    <button type='button' class='btn btn-default' id='resettimeline' title="Reset the timeline to the original position.">Reset Timeline</button>
+    <button type="button" class='btn btn-default' data-toggle="modal" data-target="#addeventform" title="Add a new event to the timeline and map.">Add Event</button>
+    <button type="button" class='btn btn-default' data-toggle="modal" data-target="#deleteevent" title="Remove an event you created.">Remove Event</button>
+    <button type="button" class='btn btn-default' data-toggle="modal" data-target="#editevent" title="Edit an event you created.">Edit Event</button>
+    <div class="controls btn-group" id="controls"></div>
+  </div>
+</div>
 
-
+<div class='row'>
+  <div class='mapbox'>
+    <div id="topic_map{{topic_id}}" class="topic_map" title="Click on a map maker to find when the event at that location occurred."></div>
+  </div>
+</div>
 
 <script>
 
@@ -383,7 +400,7 @@ $('#checkStatus').on('click', function(event) {
    
 </script>
 
-<div id="topic_map{{topic_id}}" class="topic_map"></div>
+
 
 <!--modal for wikipage-->
 <div id="viewwiki" class="modal fade" role="dialog">
@@ -508,6 +525,7 @@ $('#checkStatus').on('click', function(event) {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
+     
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
   <!-- Wrapper for slides -->
@@ -533,9 +551,9 @@ $('#checkStatus').on('click', function(event) {
       {% endfor %}
     {% endif %}
     {% endif %}
-    <div id='vph'></div>
-  
     </div>
+  
+    <div id='vph'></div>
 
   <script>
   {% if youtube_keys != None %}

@@ -45,12 +45,13 @@ def index():
 
 @app.route("/remove_topic")
 def deletetopic():
+    print "Made it to function"
     delete_data = db.session.query(Topic.topic_id).filter(Topic.createdby >= 0).all()
 
     for data in delete_data:
-        print data.topic_id
+        print "data id: ", data.topic_id
         event = request.args.get(str(data.topic_id))
-        print event
+        print "event retrieved:", event
         if event == 'checked':
             Topic.query.filter_by(topic_id=data.topic_id).delete()
             
@@ -437,7 +438,7 @@ def userinfo_helper():
 if __name__ == "__main__":
     # Debug toolbar has been turned on while working on this app
     # Will be turned off when finished
-    app.debug = True
+    app.debug = False
 
     connect_to_db(app)
 

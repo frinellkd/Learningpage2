@@ -33,7 +33,7 @@ Timeline.ClassicTheme._Impl = function() {
     // and timeline_stop must be set on the first band's theme.
     // The other attributes can be set differently for each 
     // band by using different themes for the bands.
-    this.autoWidth = false; // Should the Timeline automatically grow itself, as
+    this.autoWidth = true; // Should the Timeline automatically grow itself, as
                             // needed when too many events for the available width
                             // are painted on the visible part of the Timeline?
     this.autoWidthAnimationTime = 500; // mSec
@@ -61,7 +61,7 @@ Timeline.ClassicTheme._Impl = function() {
               //  color:      "#FFFFE0",
             },
             marker: {
-                hAlign:     "Bottom",
+                hAlign:     "Top",
                 vAlign:     "Right"
                                         /*
                 hBottomStyler: function(elmt) {
@@ -123,7 +123,7 @@ Timeline.ClassicTheme._Impl = function() {
             height:         4 // px. For thicker tapes, remember to change track height too.
         },
         instant: {
-                           icon: Timeline.urlPrefix + "images/dull-blue-circle.png", 
+                           icon: Timeline.urlPrefix + "images/dark-red-circle.png", 
                                  // default icon. Icon can also be specified per event
                       iconWidth: 10,
                      iconHeight: 10,
