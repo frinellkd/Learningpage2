@@ -156,7 +156,7 @@ function onLoad() {
           'description': "{{data.description}}.<a href='/view/{{data.topic_id}}'>GO TO PAGE</a>" ,
           'TopicID': "{{data.topic_id}}",
           'durationEvent': false,
-          'title':"{{data.topic_title}}",
+          'title':"({{data.topic_id}}){{data.topic_title}}",
           'classname': "topicboxes",
           'icon':"/static/img/dark-red-circle.png",
           'hash-color': "red",    
@@ -254,10 +254,10 @@ $('#checkStatus').on('click', function(event) {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add a Topic</h4>
+          <h4 class="modal-title">ADD A TOPIC</h4>
       </div>
         <div class="modal-body">
-          <form class='form-group' name='addtopic' action="/new_topic">
+          <form class='form-group' name='addtopic' action="/new_topic" method="post">
           <div class='form-group'>  
             <label for="topic_title">*TOPIC TITLE: </label>
             <input type="text" class='form-control' name='topic_title'id="topic_title" value="Hackbright Opens its Doors" required><br>
@@ -303,15 +303,15 @@ $('#checkStatus').on('click', function(event) {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Delete a Title</h4>
+          <h4 class="modal-title">REMOVE A TOPIC</h4>
       </div>
       <div class="modal-body">
         <!--creating the checkbox list for deleting events -->  
         <div id="removetopicform" class="checkbox">
-          <form name='deleteevent' action="/remove_topic">
+          <form name='deleteevent' action="/remove_topic" method='post'>
             {% if delete_data %}
             <label>
-              SELECT A TOPIC TO REMOVE IT 
+              Select a topic to permanently remove it from the timeline and map. 
               <br>
 
               {%for data in delete_data %}
@@ -327,7 +327,7 @@ $('#checkStatus').on('click', function(event) {
             </label>
             <input type="submit" value='REMOVE TOPIC FROM TIMELINE AND MAP'>
           {% else %}
-          <label>You can only delete topics you have created.</label>
+          <label>You can only remove topics you have created.</label>
           {% endif %}
           </form>
         </div>

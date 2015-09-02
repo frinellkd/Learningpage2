@@ -43,14 +43,14 @@ def index():
 
     return render_template("homepage.html", topic_data=topic_data, delete_data=delete_data)
 
-@app.route("/remove_topic")
+@app.route("/remove_topic", methods=['POST'])
 def deletetopic():
     print "Made it to function"
     delete_data = db.session.query(Topic.topic_id).filter(Topic.createdby >= 0).all()
 
     for data in delete_data:
         print "data id: ", data.topic_id
-        event = request.args.get(str(data.topic_id))
+        event = request.form.get(str(data.topic_id))
         print "event retrieved:", event
         if event == 'checked':
             Topic.query.filter_by(topic_id=data.topic_id).delete()
@@ -62,18 +62,18 @@ def deletetopic():
 
     return redirect('/')
 
-@app.route('/new_event/<int:id>')
+@app.route('/new_event/<int:id>', methods=['POST'])
 def addNewEvent(id):
     """Gets the information obtained from the form and process it for adding to the timeline"""    
 
-    event_title = request.args.get("event_title")
-    event_day   = request.args.get("event_day")
-    event_month = request.args.get("event_month")
-    event_year  = request.args.get("event_year")
-    event_lat   = request.args.get("event_lat")
-    event_lng   = request.args.get("event_lng")
-    event_image = request.args.get("event_image")
-    event_desc  = request.args.get("event_desc")
+    event_title = request.form.get("event_title")
+    event_day   = request.form.get("event_day")
+    event_month = request.form.get("event_month")
+    event_year  = request.form.get("event_year")
+    event_lat   = request.form.get("event_lat")
+    event_lng   = request.form.get("event_lng")
+    event_image = request.form.get("event_image")
+    event_desc  = request.form.get("event_desc")
 
     date = datetime(int(event_year), int(event_month), int(event_day))
 
@@ -85,18 +85,18 @@ def addNewEvent(id):
 
     return redirect('/view/' + str(id))
 
-@app.route('/new_topic')
+@app.route('/new_topic', methods=['POST'])
 def addNewTopic():
     """Gets the information obtained from the form and process it for adding to the timeline"""    
 
-    topic_title = request.args.get("topic_title")
-    topic_day   = request.args.get("topic_day")
-    topic_month = request.args.get("topic_month")
-    topic_year  = request.args.get("topic_year")
-    topic_lat   = request.args.get("topic_lat")
-    topic_lng   = request.args.get("topic_lng")
-    topic_image = request.args.get("topic_image")
-    topic_desc  = request.args.get("topic_desc")
+    topic_title = request.form.get("topic_title")
+    topic_day   = request.form.get("topic_day")
+    topic_month = request.form.get("topic_month")
+    topic_year  = request.form.get("topic_year")
+    topic_lat   = request.form.get("topic_lat")
+    topic_lng   = request.form.get("topic_lng")
+    topic_image = request.form.get("topic_image")
+    topic_desc  = request.form.get("topic_desc")
 
     date = datetime(int(topic_year), int(topic_month), int(topic_day))
 
@@ -121,14 +121,14 @@ def addNewTopic():
 
     return redirect('/')
 
-@app.route("/remove_event/<int:id>")
+@app.route("/remove_event/<int:id>", methods=['POST'])
 def deleteevent(id):
     delete_data = db.session.query(Event_data.event_data_id, 
                 Event_data.event_title).filter(Event_data.topic_id==id).filter(Event_data.createdby >= 0).order_by(Event_data.event_date).all()
 
     for data in delete_data:
         print data.event_data_id
-        event = request.args.get(str(data.event_data_id))
+        event = request.form.get(str(data.event_data_id))
         print event
         if event == 'checked':
             Event_data.query.filter_by(event_data_id=data.event_data_id).delete()
@@ -165,19 +165,19 @@ def editevent():
 
     return  json.dumps(event_data)
 
-@app.route("/update_event/<int:id>")
+@app.route("/update_event/<int:id>", methods=['POST'])
 def updateEvent(id):
     """Gets the information obtained from the form and process it for changing the database and updating it."""    
     
-    event_id = request.args.get("event_id")
-    event_title = request.args.get("event_title")
-    event_day   = request.args.get("event_day")
-    event_month = request.args.get("event_month")
-    event_year  = request.args.get("event_year")
-    event_lat   = request.args.get("event_lat")
-    event_lng   = request.args.get("event_lng")
-    event_image = request.args.get("event_image")
-    event_desc  = request.args.get("event_desc")
+    event_id = request.form.get("event_id")
+    event_title = request.form.get("event_title")
+    event_day   = request.form.get("event_day")
+    event_month = request.form.get("event_month")
+    event_year  = request.form.get("event_year")
+    event_lat   = request.form.get("event_lat")
+    event_lng   = request.form.get("event_lng")
+    event_image = request.form.get("event_image")
+    event_desc  = request.form.get("event_desc")
     
 
     date = datetime(int(event_year), int(event_month), int(event_day))
@@ -194,11 +194,11 @@ def updateEvent(id):
 
     return redirect('/view/' + str(id))  
 
-@app.route('/login_submit')
+@app.route('/login_submit', methods=['POST'])
 def login_submit():
     """checks whether person has a current logi and if so, logs them in.  If not it swnds them to a page to creates an account """
-    user_name = request.args.get("user_name")
-    password = request.args.get("password")
+    user_name = request.form.get("user_name")
+    password = request.form.get("password")
 
     current_users = db.session.query(User.user_name, User.user_id).filter_by(user_name=user_name, password=password).all()
     
@@ -208,7 +208,7 @@ def login_submit():
     else:
         if len(db.session.query(User.user_name).filter_by(user_name=user_name).all()) >= 1:
             flash("Incorrect password.  Please try again")
-            return redirect('/login_form')
+            return redirect('/')
 
         else: 
             flash('There is no user matching the username you provided.  Please create an account.')
@@ -246,14 +246,14 @@ def create_new_user():
 
     return render_template('new_user_form.html')
 
-@app.route('/new_user_submit')
+@app.route('/new_user_submit', methods=['POST'])
 def new_user_submit():
     """creates a new account """
     
-    first_name = request.args.get("first_name")
-    last_name = request.args.get("last_name")
-    user_name = request.args.get("user_name")
-    password = request.args.get("password")
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+    user_name = request.form.get("user_name")
+    password = request.form.get("password")
 
 
 
