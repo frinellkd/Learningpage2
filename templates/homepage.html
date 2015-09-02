@@ -156,7 +156,7 @@ function onLoad() {
           'description': "{{data.description}}.<a href='/view/{{data.topic_id}}'>GO TO PAGE</a>" ,
           'TopicID': "{{data.topic_id}}",
           'durationEvent': false,
-          'title':"({{loop.index}}){{data.topic_title}}",
+          'title':"{{data.topic_title}}",
           'classname': "topicboxes",
           'icon':"/static/img/dark-red-circle.png",
           'hash-color': "red",    
@@ -183,7 +183,7 @@ function onLoad() {
       info_dict[data_id].open(Map, map_marker)
     });
 
-    setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1,2], theme);
+    // setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1,2], theme);
 
 } //end of onload function.
 
@@ -209,6 +209,16 @@ function onResize() {
 
 
 <!-- html div for timeline, buttons and map -->
+ <!--buttons for controlling behavior of map and timeline -->
+  <div class='btn-group'>  
+      <div class='btn-group' id="mapbuttons">
+      <button type='button' id='resetmap'  title="Reset the map to the original status." class='btn btn-default'>Reset Map</button>
+      <button type='button' id='resettimeline' title="Reset the timeline to the original position." class='btn btn-default'>Reset Timeline</button>
+      <button type="button" class='btn btn-default' data-toggle="modal" data-target="#addtopicform" title="Add a new topic to the timeline and map.">Add Topic</button>
+      <button type="button" class='btn btn-default' data-toggle="modal" data-target="#deletetopic" title="Remove a topic you created.">Remove Topic</button>
+      <!-- <div class="controls btn-group" id="controls" title="Filter or highlight the items in the timeline and map."></div> -->
+    </div>
+  </div>
 
 <div class="container-fluid">
   <div class='row'>
@@ -216,17 +226,7 @@ function onResize() {
       <div id='mytimeline' style="height: 150px" title="Click on a timeline event to find location on the map."></div>
     </div>
   </div>
-  <!--buttons for controlling behavior of map and timeline -->
-  <div class='row btn-group'>  
-      <div class='btn-group' id="mapbuttons">
-      <button type='button' id='resetmap'  title="Reset the map to the original status." class='btn btn-default'>Reset Map</button>
-      <button type='button' id='resettimeline' title="Reset the timeline to the original position." class='btn btn-default'>Reset Timeline</button>
-      <button type="button" class='btn btn-default' data-toggle="modal" data-target="#addtopicform" title="Add a new topic to the timeline and map.">Add Topic</button>
-      <button type="button" class='btn btn-default' data-toggle="modal" data-target="#deletetopic" title="Remove a topic you created.">Remove Topic</button>
-      <div class="controls btn-group" id="controls" title="Filter or highlight the items in the timeline and map."></div>
-    </div>
-  </div>
-
+ 
   <div class='row'>  
     <div class="mapbox">
       <div id='map-canvas' class='map-canvas' title="Click on a map maker to find when the event at that location occurred." >Map goes here!</div>

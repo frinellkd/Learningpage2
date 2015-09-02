@@ -95,6 +95,7 @@
 .timeline-event-icon, .timeline-event-label,.timeline-event-tape{
 	position:absolute;
 	cursor:pointer;
+    text-align: center;
 }
 
 .timeline-event-tape,

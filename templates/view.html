@@ -246,7 +246,7 @@ function onLoad() {
         width:          "70%",
         timeZone:       -8, 
         intervalUnit:   Timeline.DateTime.{{time_data.band1}}, 
-        intervalPixels: 400,
+        intervalPixels: 750,
         theme:          theme
         }),
      Timeline.createBandInfo({
@@ -306,7 +306,9 @@ function onLoad() {
           'title':"({{loop.index}}){{data.event_title}}",
           'classname': "eventboxes" ,
           'highlightColor': false,
-          'icon':"/static/img/dark-red-circle.png"   
+          'icon':"/static/img/dark-red-circle.png",
+          "icon-position": "center"
+
         })
 
       event_dict['{{loop.index}}']='{{data.event_date}}' 
@@ -324,11 +326,11 @@ function onLoad() {
       var evt = tl.getBand(0).getEventSource().getEvent(eventID);
       var data_id = evt.getProperty('TopicID');
       var map_marker = marker_dict2[data_id];
-      Map.setZoom(17);
+      Map.setZoom(15);
       Map.panTo(map_marker.position);
     });
 
-   setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1,2], theme); 
+   // setupFilterHighlightControls(document.getElementById("controls"), tl, [0,1,2], theme); 
 
 } //end of onload function.
 
@@ -358,27 +360,28 @@ function centerTimeline(index) {
 <div class='row'>
 <!-- Trigger the modal with a button -->
   <div class='btn-group'>
-    <button class="button btn btn-default" data-toggle="modal" data-target=".watchvideo">Watch a Video</button>
-    <button class="button btn btn-default" data-toggle="modal" data-target="#viewwiki">Read the Wiki</button>
-  </div>
-</div>
-
-<div class='row'>
-  <div class="boxForTimeline">
-    <div id='mytimeline' style="height: 150px" title="Click on a timeline event to find location on the map."></div>
-  </div>
-</div>
-
-<div class='row btn-group2'>
-  <div class='btn-group' id='bctm'>
+    <button class="button btn btn-default" data-toggle="modal" data-target=".watchvideo">Watch Youtube Video</button>
+    <button class="button btn btn-default" data-toggle="modal" data-target="#viewwiki">Read Wikipedia Page</button>
     <button type='button' class='btn btn-default' id='resetmap' title="Reset the map to the original status.">Reset Map</button>
     <button type='button' class='btn btn-default' id='resettimeline' title="Reset the timeline to the original position.">Reset Timeline</button>
     <button type="button" class='btn btn-default' data-toggle="modal" data-target="#addeventform" title="Add a new event to the timeline and map.">Add Event</button>
     <button type="button" class='btn btn-default' data-toggle="modal" data-target="#deleteevent" title="Remove an event you created.">Remove Event</button>
     <button type="button" class='btn btn-default' data-toggle="modal" data-target="#editevent" title="Edit an event you created.">Edit Event</button>
-    <div class="controls btn-group" id="controls"></div>
   </div>
 </div>
+
+<div class='row'>
+  <div class="boxForTimeline">
+    <div id='mytimeline' style="height: 255px" title="Click on a timeline event to find location on the map."></div>
+  </div>
+</div>
+
+<!-- <div class='row btn-group2'>
+  <div class='btn-group' id='bctm'>
+    
+    <div class="controls btn-group" id="controls"></div>
+  </div>
+</div -->
 
 <div class='row'>
   <div class='mapbox'>
@@ -409,8 +412,8 @@ $('#checkStatus').on('click', function(event) {
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h1 id='wiki_title'>{{wiki_title|safe}}</h1>
-          <button type="button" class="infobutton" data-toggle="modal" data-target="#addeventform">Add an Event</button>
-          <button type="button" class="infobutton" data-toggle="modal" data-target="#editevent">Edit an Event</button>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addeventform">Add Event</button>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editevent">Edit Event</button>
       </div>
       <div class="modal-body">
         <container>
@@ -437,36 +440,38 @@ $('#checkStatus').on('click', function(event) {
           <h4 class="modal-title">Add an Event</h4>
       </div>
       <div class="modal-body">
+          <div class='form-group'>
           <form name='addevent' action="/new_event/{{topic_id}}">
           <label for="event_title">*EVENT TITLE: </label>
-          <input type="text" name='event_title'id="event_title" value="Event Title" required><br>
-          <label for="event_start_date">EVENT DATE: </label><br>
+          <input type="text" name='event_title'id="event_title" value="Event Title" class='form-control' required>
+          <label for="event_start_date">EVENT DATE: </label>
           <label for="event_day">DAY: </label>
-          <select name="event_day" id="event_day">
+          <select name="event_day" id="event_day" class='form-control'>
             {% for n in range(1,32) %}
              <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
             {% endfor %}
           </select>  
           <label for="event_month">MONTH: </label>
-          <select name="event_month" id="event_month">
+          <select name="event_month" id="event_month" class='form-control'>
             {% for n in range(1,13) %}
              <option value='{{'%02d'%n}}'>{{'%02d'%n}}</option>
             {% endfor %}
           </select>
           <label for="event_year">*YEAR: </label>
-          <input type="text" id="event_year" value="1972" name="event_year"required><br>
+          <input type="text" id="event_year" value="1972" name="event_year" class='form-control' required>
           <label for="event_lat">*Latitude: </label>
-          <input type="text" id="event_lat" value="37.7886334" name="event_lat" required>
+          <input type="text" id="event_lat" value="37.7886334" name="event_lat" class='form-control' required>
           <label for="event_lng">*Longtitude: </label>
-          <input type="text" id="event_lng" value="-122.4114752" name="event_lng" required><br>
+          <input type="text" id="event_lng" value="-122.4114752" name="event_lng" class='form-control' required><br>
           <label for="event_image">IMAGE URL: </label>
-          <input type="text" id="event_img" value="" name="event_img"><br>
+          <input type="text" id="event_img" value="" name="event_img" class='form-control'>
 
           <label for="event_desc">DESCRIPTION</label>
-          <input type="text" style"width: 200px" id="event_desc" name="event_desc" value="Describe the event.  Max 200 characters" required><br>
-          * Denotes required fields.<br>
+          <input type="text" style"width: 200px" id="event_desc" name="event_desc" value="Describe the event.  Max 200 characters"  class='form-control' required><br>
+          * Denotes required fields.
           <input type="submit" value='ADD EVENT TO TIMELINE AND MAP'>
         </form>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -489,6 +494,7 @@ $('#checkStatus').on('click', function(event) {
       <div class="modal-body">
         <!--creating the checkbox list for deleting events -->  
         <div id="removeeventform" class="checkbox">
+          <div class='form-group'>
           <form name='deleteevent' action="/remove_event/{{topic_id}}">
             {% if delete_data %}
             <label>
@@ -506,7 +512,7 @@ $('#checkStatus').on('click', function(event) {
               
               {% endfor%}
             </label>
-            <input type="submit" value='REMOVE EVENT FROM TIMELINE AND MAP'>
+            <input type="submit" class='btn btn-default' value='REMOVE EVENT FROM TIMELINE AND MAP'>
           {% else %}
           <label>You can only delete events you have created.</label>
           {% endif %}
@@ -518,19 +524,20 @@ $('#checkStatus').on('click', function(event) {
       </div>    
     </div>    
   </div>      
+</div>
 </div> 
 
 <!--modal for youtube videos-->
 <div class="modal fade watchvideo" tabindex="-1" role="dialog" title='Click on an image to select a video to play.'>
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
      
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
   <!-- Wrapper for slides -->
   
-  <div id = "myCarosel" class="carousel-inner" tooltip="Click on an image to play corresponding video.">
+  <div id = "myCarousel" class="carousel-inner" tooltip="Click on an image to play corresponding video.">
     {% if youtube_keys != None %}
       {% for item in youtube_keys[0:1] %}
       <div class="item active">
@@ -560,7 +567,7 @@ $('#checkStatus').on('click', function(event) {
       {% for key in youtube_keys %}
           
               // embeds a video upon clicking the image related to the video
-          var embedVid_{{key.youtube_video_key}} = '<iframe width="560" height="315" src="https://www.youtube.com/embed/{{key.youtube_video_key}}?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>'
+          var embedVid_{{key.youtube_video_key}} = '<iframe width="560" height="315" src="https://www.youtube.com/embed/{{key.youtube_video_key}}?rel=0&autoplay=1" frameborder="0" class="youtubevideo" allowfullscreen></iframe>'
 
           $('#{{loop.index}}').on("click", function(evt) {
                   evt.preventDefault();

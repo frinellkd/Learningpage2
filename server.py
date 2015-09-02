@@ -414,6 +414,9 @@ def userinfo(id):
                                     Topic.topic_title,
                                     Visit.visit_date).join(Topic_visited).join(Topic).filter(Visit.user_id == id).all()
 
+    
+
+
     print "topics_visited:", topics_visited                                
     
     return render_template("user_info.html", user=user_info, topics_visited=topics_visited)
